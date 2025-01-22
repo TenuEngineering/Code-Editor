@@ -1,0 +1,67 @@
+Kart Adı:1110
+Versiyon:R00
+KartBilgileri:1 - 12V 24V,2 -  26 input,3 - 45 output
+İnput Pinler:A1,A2,A3,A4,A5,A11,A12,A14,A15,A16,A19,A20,A21,A22,A23,A25,B5,B6,B12,B15,B16,B21,B22,B23,B24,B25
+Output Pinler:A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A17,A18,A19,A20,A21,A23,A24,A25,A26,A27,A28,B2,B3,B4,B7,B8,B9,B10,B11,B12,B13,B14,B17,B18,B19,B20,B27,B28
+İletişim Pinler:B22,B23,B25
+Motor Pinler:A1,A8,B1,B8
+*
+A4:Digital Input,Edge Counter,Analog Input (Voltage)|
+A5:Digital Input,Edge Counter,Analog Input (Voltage)|
+A6:Digital Input,Edge Counter|
+A7:Digital Input,Edge Counter,Analog Input (Voltage)|
+B2:Digital Input,Edge Counter|
+B3:Digital Input,Edge Counter|
+B4:Digital Input,Edge Counter|
+B5:Digital Input,Edge Counter|
+B6:Digital Input,Edge Counter|
+B7:Digital Input,Edge Counter,Analog Input (Voltage)|
+C2:Digital Input,Edge Counter|
+C5:Digital Input,Edge Counter|
+*
+A1:Disabled,DRW
+A2:Disabled,DRW
+A3:Disabled,DRW
+A4:Disabled,DRW
+A5:Disabled,DRW
+A6:Disabled,1A
+A7:Disabled,1A
+A8:Disabled,1A
+A9:Disabled,1A
+A10:Disabled,1A
+A11:Disabled,DRW
+A12:Disabled,DRW
+A13:Disabled,DRW
+A14:Disabled,DRW
+A15:Disabled,DRW
+A17:Disabled,DRW
+A18:Disabled,DRW
+A19:Disabled,DRW
+A20:Disabled,DRW
+A21:Disabled,DRW
+A23:Disabled,DRW
+A24:Disabled,DRW
+A25:Disabled,DRW
+A26:Disabled,DRW
+A27:Disabled,DRW
+A28:Disabled,DRW
+B1:Disabled,DRW
+B2:Disabled,1A
+B3:Disabled,1A
+B4:Disabled,1A
+B7:Disabled,1.5A
+B8:Disabled,1.5A
+B9:Disabled,1A
+B10:Disabled,1A
+B11:Disabled,1A
+B12:Disabled,0
+B13:Disabled,1A
+B14:Disabled,DRW
+B17:Disabled,1.5A
+B18:Disabled,1.5A
+B19:Disabled,1.5A
+B20:Disabled,1.5A
+B26:Disabled,1.5A
+B27:Disabled,1.5A
+B28:Disabled,DRW
+*

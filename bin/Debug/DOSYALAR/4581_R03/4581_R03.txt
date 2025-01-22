@@ -1,0 +1,29 @@
+Kart Adı:4581
+Versiyon:R03
+KartBilgileri:1 - 12V,2 - 12 input,3 - 8 output
+İnput Pinler:A4,A5,A7,B2,B3,B4,B5,B6,B7,C2,C5
+Output Pinler:A1,A2,A3,A8,B1,B8,C6,C7
+İletişim Pinler:C3,C4
+Motor Pinler:A1,A8,B1,B8
+*
+A4:Digital Input,Edge Counter,Analog Input (Voltage)|
+A5:Digital Input,Edge Counter,Analog Input (Voltage)|
+A7:Digital Input,Edge Counter,Analog Input (Voltage)|
+B2:Digital Input,Edge Counter|
+B3:Digital Input,Edge Counter|
+B4:Digital Input,Edge Counter|
+B5:Digital Input,Edge Counter|
+B6:Digital Input,Edge Counter|
+B7:Digital Input,Edge Counter,Analog Input (Voltage)|
+C2:Digital Input,Edge Counter|
+C5:Digital Input,Edge Counter|
+*
+A1:NC
+A2:NC
+A3:NC
+A8:NC
+B1:NC
+B8:NC
+C6:NC
+C7:NC
+*

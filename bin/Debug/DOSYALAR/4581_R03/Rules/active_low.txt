@@ -1,0 +1,4 @@
+startRegex_index:active_low\(
+rulesRegex:active_low\(\)
+stop_index:)
+description:active_low() fonksiyonu parametre almıyor.

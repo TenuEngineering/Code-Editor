@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="." xml:space="preserve">
+    <value />
+  </data>
+  <data name="CardAddedSuccess" xml:space="preserve">
+    <value>NEW CARD FOLDER CREATED SUCCESSFULLY</value>
+  </data>
+  <data name="CardAddError" xml:space="preserve">
+    <value>Please add a card first.</value>
+  </data>
+  <data name="CardExistsWarning" xml:space="preserve">
+    <value>This card has already been added.</value>
+  </data>
+  <data name="CardFolderExistsWarning" xml:space="preserve">
+    <value>A CARD FOLDER WITH THE SAME NAME EXISTS\nWOULD YOU LIKE TO OVERWRITE IT?</value>
+  </data>
+  <data name="CardFolderOverwriteConfirmation" xml:space="preserve">
+    <value>THE DEFAULT CARD FOLDER WILL BE DELETED\nDO YOU CONFIRM?</value>
+  </data>
+  <data name="CardNameEmptyError" xml:space="preserve">
+    <value>PLEASE ENTER THE CARD NAME.</value>
+  </data>
+  <data name="CardPropertiesNotFoundError" xml:space="preserve">
+    <value>Card properties not found.</value>
+  </data>
+  <data name="CardPropertiesSuccess" xml:space="preserve">
+    <value>Card properties successfully loaded.</value>
+  </data>
+  <data name="ChooseCardError" xml:space="preserve">
+    <value>PLEASE CHOOSE A CARD.</value>
+  </data>
+  <data name="ChooseWorkspace" xml:space="preserve">
+    <value>Choose a workspace</value>
+  </data>
+  <data name="CreateProjectAddECU" xml:space="preserve">
+    <value>Add ECU</value>
+  </data>
+  <data name="CreateProjectAddedECU" xml:space="preserve">
+    <value>Added ECU</value>
+  </data>
+  <data name="CreateProjectBrowseBtn" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="CreateProjectChooiceECU" xml:space="preserve">
+    <value>Chooise ECU</value>
+  </data>
+  <data name="CreateProjectDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="CreateProjectECUInfo" xml:space="preserve">
+    <value>ECU Information</value>
+  </data>
+  <data name="CreateProjectECUName" xml:space="preserve">
+    <value>ECU Name</value>
+  </data>
+  <data name="CreateProjectLabelAdd" xml:space="preserve">
+    <value>Add a new project</value>
+  </data>
+  <data name="CreateProjectProjectName" xml:space="preserve">
+    <value>Project Name</value>
+  </data>
+  <data name="CreateProjectWorkspace" xml:space="preserve">
+    <value>Select a workspace</value>
+  </data>
+  <data name="HomePageButton1" xml:space="preserve">
+    <value>Create Project</value>
+  </data>
+  <data name="HomePageButton2" xml:space="preserve">
+    <value>Open Project</value>
+  </data>
+  <data name="HomePageProjectInfo" xml:space="preserve">
+    <value>Recently Created Projects</value>
+  </data>
+  <data name="HomePageTreeWievToday" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="HomePageTreeWievWeek" xml:space="preserve">
+    <value>This Week</value>
+  </data>
+  <data name="HomePageTreeWievYesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="InvalidPathError" xml:space="preserve">
+    <value>Invalid folder path.</value>
+  </data>
+  <data name="ProjectCreatedSuccess" xml:space="preserve">
+    <value>PROJECT SUCCESSFULLY CREATED</value>
+  </data>
+  <data name="ProjectFolderExistsWarning" xml:space="preserve">
+    <value>A FOLDER WITH THE SAME NAME EXISTS\nWOULD YOU LIKE TO OVERWRITE IT?</value>
+  </data>
+  <data name="ProjectNameEmptyError" xml:space="preserve">
+    <value>PLEASE ENTER THE PROJECT NAME.</value>
+  </data>
+  <data name="ProjectNotFound" xml:space="preserve">
+    <value>Project not available</value>
+  </data>
+  <data name="ProjectOverwriteConfirmation" xml:space="preserve">
+    <value>THE DEFAULT {0} PROJECT WILL BE DELETED\nDO YOU CONFIRM?</value>
+  </data>
+  <data name="ProjectSelectionError" xml:space="preserve">
+    <value>PLEASE FILL OUT ALL FIELDS.</value>
+  </data>
+  <data name="warningCreateProject1" xml:space="preserve">
+    <value>PLEASE FILL IN ALL FIELDS</value>
+  </data>
+  <data name="warningCreateProject10" xml:space="preserve">
+    <value>PROJECT CREATED SUCCESSFULLY</value>
+  </data>
+  <data name="warningCreateProject11" xml:space="preserve">
+    <value>This card has already been added</value>
+  </data>
+  <data name="warningCreateProject2" xml:space="preserve">
+    <value>PLEASE ENTER THE PROJECT NAME</value>
+  </data>
+  <data name="warningCreateProject3" xml:space="preserve">
+    <value>PLEASE ENTER THE CARD NAME</value>
+  </data>
+  <data name="warningCreateProject4" xml:space="preserve">
+    <value>PLEASE SELECT A CARD</value>
+  </data>
+  <data name="warningCreateProject5" xml:space="preserve">
+    <value>Please add a card first</value>
+  </data>
+  <data name="warningCreateProject6" xml:space="preserve">
+    <value>A FOLDER WITH THE SAME NAME ALREADY EXISTS\nDO YOU WANT TO OVERWRITE IT?</value>
+  </data>
+  <data name="warningCreateProject7" xml:space="preserve">
+    <value>The DEFAULT CARD FOLDER WILL BE DELETED\nDO YOU CONFIRM?</value>
+  </data>
+  <data name="warningCreateProject8" xml:space="preserve">
+    <value>NEW CARD FOLDER CREATED SUCCESSFULLY</value>
+  </data>
+  <data name="warningCreateProject9" xml:space="preserve">
+    <value>The DEFAULT PROJECT WILL BE DELETED\nDO YOU CONFIRM?</value>
+  </data>
+</root>

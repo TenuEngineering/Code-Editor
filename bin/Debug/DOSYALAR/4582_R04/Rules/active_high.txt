@@ -1,0 +1,4 @@
+startRegex_index:active_high\(
+rulesRegex:active_high\(\d+\)
+stop_index:)
+description:active_high() fonksiyonu sadece bir int parametre alabilir.
