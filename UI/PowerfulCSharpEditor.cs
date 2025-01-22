@@ -27,6 +27,7 @@ using System.Collections;
 namespace Tester
 {
     // deneme
+    // deneme
     public partial class PowerfulCSharpEditor : Form
     {
         private Thread trd;
