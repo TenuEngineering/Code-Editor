@@ -23,6 +23,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO.Ports;
 using System.Reflection.Metadata.Ecma335;
 using System.Collections;
+using Tester.Core;
 
 namespace Tester
 {
@@ -30,7 +31,12 @@ namespace Tester
     // deneme
     public partial class PowerfulCSharpEditor : Form
     {
-        private Thread trd;
+        private readonly FileService _fileService;
+        private readonly SyntaxChecker _syntaxChecker;
+        private readonly AutocompleteService _autocompleteService;
+        private readonly TreeViewService _treeViewService;
+        private readonly RuleEngine _ruleEngine;
+
 
         string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
         string[] methods = { "Equals()", "GetHashCode()", "GetType()", "ToString()" };
@@ -152,6 +158,12 @@ namespace Tester
             copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
             cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
             pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+            _fileService = new FileService();
+            _syntaxChecker = new SyntaxChecker();
+            _autocompleteService = new AutocompleteService();
+            _treeViewService = new TreeViewService();
+            _ruleEngine = new RuleEngine();
+                
         }
 
 
@@ -184,17 +196,6 @@ namespace Tester
 
         }
 
-
-        /*  private void PowerfulCSharpEditor_Load(object sender, EventArgs e)
-          {
-              InitializeTreeView();
-              // Başlangıç klasörünü belirtin
-              string rootFolderPath = @"PROJE";
-              LoadDirectory(this.workspaceFullPath);
-
-
-
-          }*/
 
         private async Task LoadProjectContents()
         {
@@ -1277,8 +1278,6 @@ namespace Tester
             }
         }
 
-
-
         void ToolTipHandler(object sender, ToolTipNeededEventArgs args, string pattern, string pattern2, int errorStartIndex, int lineNumber, string line, int errorEndIndex, string errDescriptions)
         {
             //FastColoredTextBox tb = sender as FastColoredTextBox;
@@ -1408,7 +1407,6 @@ namespace Tester
                 return x.title.CompareTo(y.title);
             }
         }
-
 
         private async Task InitializeDataGridViewEvents(DataGridView dgv)
         {
@@ -2673,10 +2671,6 @@ namespace Tester
             }
         }
 
-        private void viewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void treeViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2820,16 +2814,6 @@ namespace Tester
                 // Do what you want here
                 e.Handled = true;
             }
-        }
-
-        private void dgvObjectExplorer_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)

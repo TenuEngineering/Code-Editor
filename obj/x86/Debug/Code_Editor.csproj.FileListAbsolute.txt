@@ -63,7 +63,6 @@ C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x8
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.PowerfulCSharpEditor.resources
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.progressBarSet.resources
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.VisibleRangeChangedDelayedSample.resources
-C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.MainForm.resources
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.Properties.Resources.resources
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.Languages.String.en.resources
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.Languages.String.tr.resources

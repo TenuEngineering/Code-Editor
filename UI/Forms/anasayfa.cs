@@ -16,18 +16,31 @@ using System.Threading;
 using static Tester.createProject;
 using System.Security.Cryptography;
 using System.Reflection;
+using Tester.Services;
+using Tester.Core.Models;
 
 namespace Tester
 {
     public partial class anasayfa : Form
     {
+        private readonly LanguageService _languageService;
+        private readonly ProjectService _projectService;
+        private string _lanCulture;
+
+
         ResourceManager resManager;    // Resource manager to access resx files
         CultureInfo cultureInfo;
         string lanCulture;
         public anasayfa()
         {
             InitializeComponent();
-            LoadLanguages();
+
+            // Servislerin başlatılması
+            _languageService = new LanguageService("Tester.Languages.String", typeof(anasayfa).Assembly);
+            _projectService = new ProjectService();
+
+            // Varsayılan dil
+            _languageService.ChangeLanguage("en");
 
         }
         private void label1_Click(object sender, EventArgs e)
@@ -35,36 +48,7 @@ namespace Tester
 
         }
 
-
-        private void LoadLanguages()
-        {
-            // ResX dosyalarını kullanmak için ResourceManager
-            resManager = new ResourceManager("Tester.Languages.String", Assembly.GetExecutingAssembly());
-            ChangeLanguage("en");
-            lanCulture = "en";
-        }
-        private void ChangeLanguage(string langCode)
-        {
-            cultureInfo = new CultureInfo(langCode);
-            CultureInfo.CurrentCulture = cultureInfo;
-            CultureInfo.CurrentUICulture = cultureInfo;
-
-            // Seçilen dildeki label text'ini güncelle
-            //labelSelectedLanguage.Text = resManager.GetString("SelectedLanguageLabel", cultureInfo);
-            button1.Text = GetString("HomePageButton1");
-            button2.Text = GetString("HomePageButton2");
-            label1.Text = GetString("HomePageProjectInfo");
-            lanCulture = langCode;
-            LoadProjectsIntoTreeView();
-
-        }
-
         // resx sözlüğünden veriler tüm uygulamada bu fonksiyondan alınacak
-        private string GetString(string name)
-        {
-            
-            return resManager.GetString(name);
-        }
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,16 +63,15 @@ namespace Tester
             LoadProjectsIntoTreeView();
         }
 
-
         private void LoadProjectsIntoTreeView()
         {
-            var projects = ReadProjectsFromFile(@"SONPROJELER.txt");
+            var projects = _projectService.ReadProjectsFromFile(@"SONPROJELER.txt");
 
             var validProjects = projects.Where(p => Directory.Exists(p.Path)).ToList();
 
-            var todayNode = new TreeNode(GetString("HomePageTreeWievToday"));
-            var yesterdayNode = new TreeNode(GetString("HomePageTreeWievYesterday"));
-            var thisWeekNode = new TreeNode(GetString("HomePageTreeWievWeek"));
+            var todayNode = new TreeNode(_languageService.GetString("HomePageTreeWievToday"));
+            var yesterdayNode = new TreeNode(_languageService.GetString("HomePageTreeWievYesterday"));
+            var thisWeekNode = new TreeNode(_languageService.GetString("HomePageTreeWievWeek"));
 
             foreach (var project in projects)
             {
@@ -126,42 +109,6 @@ namespace Tester
             parentNode.Nodes.Insert(0, newNode);
         }
 
-        private List<Project> ReadProjectsFromFile(string filePath)
-        {
-            var projects = new List<Project>();
-
-            if (File.Exists(filePath))
-            {
-                
-                foreach (var line in File.ReadAllLines(filePath))
-                {
-                    var parts = line.Split(',');
-                   
-
-                    if (parts.Length == 3)
-                    {
-
-                        projects.Add(new Project
-                        {
-                            Name = parts[0],
-                            Path = parts[2],
-                            Date = parts[1]
-                        });
-                    }
-                }
-            
-            }
-
-            return projects;
-        }
-
-        public class Project
-        {
-            public string Name { get; set; }
-            public string Path { get; set; }
-            public string Date { get; set; }
-        }
-
         private async void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             await Task.Delay(50);
@@ -169,10 +116,7 @@ namespace Tester
 
 
         }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
         private async Task openProject(TreeViewEventArgs e)
         {
             await Task.Delay(100);
@@ -203,7 +147,7 @@ namespace Tester
 
                 else
                 {
-                    MessageBox.Show(GetString("ProjectNotFound"));
+                    MessageBox.Show(_languageService.GetString("ProjectNotFound"));
                 }
             }
 
@@ -213,13 +157,20 @@ namespace Tester
         {
             if (languages.SelectedItem.ToString() == "English")
             {
-                ChangeLanguage("en");
+                _languageService.ChangeLanguage("en");
+                button1.Text = _languageService.GetString("HomePageButton1");
+                button2.Text = _languageService.GetString("HomePageButton2");
+                label1.Text = _languageService.GetString("HomePageProjectInfo");
             }
             else if (languages.SelectedItem.ToString() == "Turkish")
             {
                 
-                ChangeLanguage("tr");
+                _languageService.ChangeLanguage("tr");
+                button1.Text = _languageService.GetString("HomePageButton1");
+                button2.Text = _languageService.GetString("HomePageButton2");
+                label1.Text = _languageService.GetString("HomePageProjectInfo");
             }
+            LoadProjectsIntoTreeView();
         }
     }
 
