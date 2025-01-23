@@ -16,6 +16,8 @@ using System.Resources;
 using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
+using Tester.Services;
+using System.Reflection;
 
 namespace Tester
 {
@@ -25,40 +27,37 @@ namespace Tester
         private bool isSubFolderCreation;
         private string projectName;
         private Thread trd;
+        private readonly LanguageService _languageService;
 
-        ResourceManager resManager;
-        CultureInfo cultureInfo;
+        // Servislerin başlatılması
 
         public createProject(string projectName, bool isSubFolderCreation)
         {
             InitializeComponent();
             this.projectName = projectName;
             this.isSubFolderCreation = isSubFolderCreation; // Alt klasör oluşturma 
+            _languageService = new LanguageService("Tester.Languages.String", typeof(anasayfa).Assembly);
+
         }
 
         public createProject(string langCode, ResourceManager resManager2, CultureInfo cultureInfo)
         {
             InitializeComponent();
-            resManager = resManager2;
-
-            cultureInfo = new CultureInfo(langCode);
-            CultureInfo.CurrentCulture = cultureInfo;
-            CultureInfo.CurrentUICulture = cultureInfo;
-
+            _languageService = new LanguageService("Tester.Languages.String", typeof(anasayfa).Assembly);
             if (langCode != "en")
             {
 
-                label2.Text = GetString("CreateProjectWorkspace");
-                chooiseBrowse.Text = GetString("CreateProjectBrowseBtn");
-                label3.Text = GetString("CreateProjectLabelAdd");
-                groupBox6.Text = GetString("CreateProjectProjectName");
-                groupBox3.Text = GetString("CreateProjectChooiceECU");
-                groupBox2.Text = GetString("CreateProjectECUName");
-                addCard.Text = GetString("CreateProjectAddECU");
-                groupBox4.Text = GetString("CreateProjectECUInfo");
-                groupBox5.Text = GetString("CreateProjectAddedECU");
-                deleteButton.Text = GetString("CreateProjectDelete");
-                button3.Text = GetString("HomePageButton1");
+                label2.Text = _languageService.GetString("CreateProjectWorkspace");
+                chooiseBrowse.Text = _languageService.GetString("CreateProjectBrowseBtn");
+                label3.Text = _languageService.GetString("CreateProjectLabelAdd");
+                groupBox6.Text = _languageService.GetString("CreateProjectProjectName");
+                groupBox3.Text = _languageService.GetString("CreateProjectChooiceECU");
+                groupBox2.Text = _languageService.GetString("CreateProjectECUName");
+                addCard.Text = _languageService.GetString("CreateProjectAddECU");
+                groupBox4.Text = _languageService.GetString("CreateProjectECUInfo");
+                groupBox5.Text = _languageService.GetString("CreateProjectAddedECU");
+                deleteButton.Text = _languageService.GetString("CreateProjectDelete");
+                button3.Text = _languageService.GetString("HomePageButton1");
 
             }
 
@@ -68,17 +67,12 @@ namespace Tester
         public createProject()
         {
             InitializeComponent();
+
         }
 
         ArrayList kartisim = new ArrayList();
         ArrayList kartno = new ArrayList();
         bool kontrol = false, olusturkontrol;
-
-        private string GetString(string name)
-        {
-
-            return resManager.GetString(name);
-        }
 
         private async void button3_Click(object sender, EventArgs e)
         {
@@ -92,7 +86,7 @@ namespace Tester
             }
             else
             {
-                MessageBox.Show(GetString("ChooseWorkspace"));
+                MessageBox.Show(_languageService.GetString("ChooseWorkspace"));
             }
 
 
@@ -107,19 +101,19 @@ namespace Tester
             await Task.Delay(100);
             if (string.IsNullOrEmpty(projectName2.Text))
             {
-                errorMessages.AppendLine(GetString("warningCreateProject2"));
+                errorMessages.AppendLine(_languageService.GetString("warningCreateProject2"));
                 isError = true;
             }
 
             if (string.IsNullOrEmpty(cardName.Text))
             {
-                errorMessages.AppendLine(GetString("warningCreateProject3"));
+                errorMessages.AppendLine(_languageService.GetString("warningCreateProject3"));
                 isError = true;
             }
 
             if (chooisedCard.SelectedItem == null)
             {
-                errorMessages.AppendLine(GetString("warningCreateProject4"));
+                errorMessages.AppendLine(_languageService.GetString("warningCreateProject4"));
                 isError = true;
             }
 
@@ -128,7 +122,7 @@ namespace Tester
             {
                 if (errorMessages.ToString().Split('\n').Length > 2)
                 {
-                    MessageBox.Show(GetString("warningCreateProject1"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(_languageService.GetString("warningCreateProject1"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
@@ -138,7 +132,7 @@ namespace Tester
             }
             if (!isKartAdded)
             {
-                MessageBox.Show(GetString("warningCreateProject5"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(_languageService.GetString("warningCreateProject5"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (isSubFolderCreation)
@@ -150,10 +144,10 @@ namespace Tester
                 if (Directory.Exists(workspaceFullPath))
                 {
                     DialogResult a, b;
-                    a = MessageBox.Show(GetString("warningCreateProject6"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    a = MessageBox.Show(_languageService.GetString("warningCreateProject6"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (a == DialogResult.Yes)
                     {
-                        b = MessageBox.Show(cardName.Text.ToUpper() + GetString("warningCreateProject7"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                        b = MessageBox.Show(cardName.Text.ToUpper() + _languageService.GetString("warningCreateProject7"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                         if (b == DialogResult.Yes)
                         {
                             if (Directory.Exists(workspaceFullPath)) Directory.Delete(workspaceFullPath, true);
@@ -206,7 +200,7 @@ namespace Tester
                 await systemWriter.WriteLineAsync("VERSIYON:" + chooisedCard.SelectedItem.ToString().Split('_')[1]);
                 systemWriter.Close();
 
-                MessageBox.Show(GetString("warningCreateProject8"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(_languageService.GetString("warningCreateProject8"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 PowerfulCSharpEditor PowerfulCSharpEditorForm = new PowerfulCSharpEditor();
 
                 await Task.Delay(100);
@@ -224,10 +218,10 @@ namespace Tester
                 if (Directory.Exists(subFolderPath))
                 {
                     DialogResult a, b;
-                    a = MessageBox.Show(GetString("ProjectFolderExistsWarning"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    a = MessageBox.Show(_languageService.GetString("ProjectFolderExistsWarning"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (a == DialogResult.Yes)
                     {
-                        b = MessageBox.Show(projectName2.Text.ToUpper() + " " +GetString("warningCreateProject9"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                        b = MessageBox.Show(projectName2.Text.ToUpper() + " " +_languageService.GetString("warningCreateProject9"), "TENU", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                         if (b == DialogResult.Yes)
                         {
                             if (Directory.Exists(subFolderPath)) Directory.Delete(subFolderPath, true);
@@ -298,7 +292,7 @@ namespace Tester
                         
                     }
 
-                    MessageBox.Show(GetString("warningCreateProject10"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(_languageService.GetString("warningCreateProject10"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     PowerfulCSharpEditor PowerfulCSharpEditorForm = new PowerfulCSharpEditor();
 
                     PowerfulCSharpEditor powerfulCSharpEditor = new PowerfulCSharpEditor(workspace);
@@ -362,7 +356,7 @@ namespace Tester
                 // Sütunlar ekleyelim
                 cardInformations.Columns.Add("", -2, HorizontalAlignment.Center);
 
-                if (kartProperties != null && kartProperties.Count > 0)
+                if (kartProperties.Count > 0)
                 {
                     // Başlık
                     string kartInfoHeader = $"********* {kartNo} **********";
@@ -422,13 +416,13 @@ namespace Tester
 
             if (string.IsNullOrEmpty(cardName.Text))
             {
-                errorMessages.AppendLine(GetString("warningCreateProject3"));
+                errorMessages.AppendLine(_languageService.GetString("warningCreateProject3"));
                 isError = true;
             }
 
             if (chooisedCard.SelectedItem == null)
             {
-                errorMessages.AppendLine(GetString("warningCreateProject4"));
+                errorMessages.AppendLine(_languageService.GetString("warningCreateProject4"));
                 isError = true;
             }
 
@@ -437,7 +431,7 @@ namespace Tester
             {
                 if (errorMessages.ToString().Split('\n').Length > 2)
                 {
-                    MessageBox.Show(GetString("warningCreateProject1"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(_languageService.GetString("warningCreateProject1"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
@@ -475,7 +469,7 @@ namespace Tester
                 }
                 else
                 {
-                    MessageBox.Show(GetString("warningCreateProject11"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(_languageService.GetString("warningCreateProject11"), "TENU", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
