@@ -94,7 +94,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AnalyzeCode.cs" />
-    <Compile Include="Core\AutocompleteService.cs" />
+    <Compile Include="Core\variableSizeControl.cs" />
+    <Compile Include="Services\Autocomplate\AutocompleteService.cs" />
+    <Compile Include="Core\Method\MethodAutocomplateItem2.cs" />
+    <Compile Include="Core\Models\ExplorerItem.cs" />
+    <Compile Include="Core\Models\ExplorerItemComparer.cs" />
+    <Compile Include="Core\Models\ExplorerItemType.cs" />
+    <Compile Include="Core\Models\TbInfo.cs" />
+    <Compile Include="Services\Autocomplate\DeclarationSnippet.cs" />
+    <Compile Include="Services\Autocomplate\InsertEnterSnippet.cs" />
+    <Compile Include="Services\Autocomplate\InsertSpaceSnippet.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Core\Models\Project.cs" />
     <Compile Include="Core\RuleEngine.cs" />
@@ -144,6 +153,12 @@
       <DependentUpon>String.tr.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\SyntaxChecker.cs" />
+    <Compile Include="UI\Forms\tabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\tabControl.Designer.cs">
+      <DependentUpon>tabControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="VisibleRangeChangedDelayedSample.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +190,9 @@
     <EmbeddedResource Include="Languages\String.tr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>String.tr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\tabControl.resx">
+      <DependentUpon>tabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisibleRangeChangedDelayedSample.resx">
       <DependentUpon>VisibleRangeChangedDelayedSample.cs</DependentUpon>
@@ -264,7 +282,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\Triggers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)Tester.exe" "$(SolutionDir)Binary"

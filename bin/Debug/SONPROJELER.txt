@@ -1,2 +1,3 @@
 DENEME1,27.11.2024,C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\projeDenemeleri\DENEME1
 DENEME1,27.11.2024,C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\projeDenemeleri\DENEME155
+deneme2,23.1.2025,C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\projeDenemeleri\deneme2

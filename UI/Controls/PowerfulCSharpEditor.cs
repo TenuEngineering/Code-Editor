@@ -24,6 +24,7 @@ using System.IO.Ports;
 using System.Reflection.Metadata.Ecma335;
 using System.Collections;
 using Tester.Core;
+using Tester.UI.Forms;
 
 namespace Tester
 {
@@ -36,7 +37,7 @@ namespace Tester
         private readonly AutocompleteService _autocompleteService;
         private readonly TreeViewService _treeViewService;
         private readonly RuleEngine _ruleEngine;
-
+        
 
         string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
         string[] methods = { "Equals()", "GetHashCode()", "GetType()", "ToString()" };
@@ -60,7 +61,6 @@ namespace Tester
             {"output.low.continues",32 },
             {"output.low.timed",0 },
         };
-
         Dictionary<string, int> pinNumber = new Dictionary<string, int>()
         {
             {"a1",0},
@@ -71,8 +71,6 @@ namespace Tester
             {"a6",5 },
             {"a7",6 },
         };
-
-
         Dictionary<string, int> typeTotalByte = new Dictionary<string, int>()
         {
             {"char",1},
@@ -148,7 +146,8 @@ namespace Tester
         string activeProjectPath;
         int controlCounter = 0;
         string rulesPath;
-
+        tabControl tsFiles = new tabControl();
+        
         public PowerfulCSharpEditor()
         {
             InitializeComponent();
@@ -163,7 +162,7 @@ namespace Tester
             _autocompleteService = new AutocompleteService();
             _treeViewService = new TreeViewService();
             _ruleEngine = new RuleEngine();
-                
+
         }
 
 
@@ -185,12 +184,15 @@ namespace Tester
             copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
             cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
             pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+
+
         }
 
         private async void PowerfulCSharpEditor_Load(object sender, EventArgs e)
         {
             await InitializeTreeView();
-            
+
+            splitContainer2.Controls.Add(tsFiles);
             //  LoadProjectContents();
             //await LoadDirectory(this.workspaceFullPath);
 
@@ -245,80 +247,23 @@ namespace Tester
 
         private async void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await CreateTab(null);
+            await tsFiles.CreateTab(null);
         }
 
 
         private Style sameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(50, Color.Gray)));
 
-        private async Task CreateTab(string fileName)
-        {
-
-
-            try
-            {
-
-                var tb = new FastColoredTextBox();
-                tb.Font = new Font("Consolas", 9.75f);
-                tb.ContextMenuStrip = cmMain;
-                tb.Dock = DockStyle.Fill;
-                tb.BorderStyle = BorderStyle.Fixed3D;
-                //tb.VirtualSpace = true;
-                tb.LeftPadding = 17;
-                tb.Language = Language.CSharp;
-                tb.AddStyle(sameWordsStyle);//same words style
-                var tab = new FATabStripItem(fileName != null ? Path.GetFileName(fileName) : "[new]", tb);
-                tab.Tag = fileName;
-                if (fileName != null)
-                    tb.OpenFile(fileName);
-                tb.Tag = new TbInfo();
-
-                await Task.Delay(100);
-
-                tsFiles.AddTab(tab);
-                tsFiles.SelectedItem = tab;
-                tb.Focus();
-                tb.DelayedTextChangedInterval = 1000;
-                tb.DelayedEventsInterval = 500;
-                tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(tb_TextChangedDelayed);
-                tb.SelectionChangedDelayed += new EventHandler(tb_SelectionChangedDelayed);
-                tb.TextChanged += FastColoredTextBox_TextChanged;
-                tb.KeyDown += new KeyEventHandler(tb_KeyDown);
-                tb.MouseMove += new MouseEventHandler(tb_MouseMove);
-                tb.ChangedLineColor = changedLineColor;
-
-
-                if (btHighlightCurrentLine.Checked)
-                    tb.CurrentLineColor = currentLineColor;
-                tb.ShowFoldingLines = btShowFoldingLines.Checked;
-                tb.HighlightingRangeType = HighlightingRangeType.VisibleRange;
-                //tool error show
-
-                //create autocomplete popup menu
-                AutocompleteMenu popupMenu = new AutocompleteMenu(tb);
-                popupMenu.Items.ImageList = ilAutocomplete;
-                popupMenu.MinFragmentLength = 1;
-                popupMenu.Opening += new EventHandler<CancelEventArgs>(popupMenu_Opening);
-                BuildAutocompleteMenu(popupMenu);
-                (tb.Tag as TbInfo).popupMenu = popupMenu;
-            }
-            catch (Exception ex)
-            {
-                if (MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.Retry)
-                    await CreateTab(fileName);
-            }
-        }
 
         void popupMenu_Opening(object sender, CancelEventArgs e)
         {
             //---block autocomplete menu for comments
             //get index of green style (used for comments)
-            var iGreenStyle = CurrentTB.GetStyleIndex(CurrentTB.SyntaxHighlighter.GreenStyle);
+            var iGreenStyle = tsFiles.getCurrentTB().GetStyleIndex(tsFiles.getCurrentTB().SyntaxHighlighter.GreenStyle);
             if (iGreenStyle >= 0)
-                if (CurrentTB.Selection.Start.iChar > 0)
+                if (tsFiles.getCurrentTB().Selection.Start.iChar > 0)
                 {
                     //current char (before caret)
-                    var c = CurrentTB[CurrentTB.Selection.Start.iLine][CurrentTB.Selection.Start.iChar - 1];
+                    var c = tsFiles.getCurrentTB()[tsFiles.getCurrentTB().Selection.Start.iLine][tsFiles.getCurrentTB().Selection.Start.iChar - 1];
                     //green Style
                     var greenStyleIndex = Range.ToStyleIndex(iGreenStyle);
                     //if char contains green style then block popup menu
@@ -649,7 +594,7 @@ namespace Tester
             if (e.KeyData == (Keys.K | Keys.Control))
             {
                 //forced show (MinFragmentLength will be ignored)
-                (CurrentTB.Tag as TbInfo).popupMenu.Show(true);
+                (tsFiles.getCurrentTB().Tag as TbInfo).popupMenu.Show(true);
                 e.Handled = true;
             }
         }
@@ -686,194 +631,13 @@ namespace Tester
                     r.SetStyle(sameWordsStyle);
         }
 
-        private async Task<bool> variableLimitControl()
-        {
-            string variableFile = "";
-
-            List<string> variableControl = new List<string>();
-
-            string directoryPath = tsFiles.SelectedItem.Tag as string;
-            string fileName =  tsFiles.SelectedItem.Title;
-
-
-            string[] variable = new string[] {
-
-                "uint8_t.txt",
-                "uint16_t.txt",
-                "uint32_t.txt",
-                "float32_t.txt",
-                "float64_t.txt"
-
-            };
-            
-            foreach (var item in variable)
-            {
-
-                if (fileName == item)
-                {
-                    variableFile = fileName;
-                    break;
-                }
-            }
-
-            string modifiedPath2 = "";
-
-            modifiedPath2 = Path.GetDirectoryName(directoryPath);
-            activeProjectPath = modifiedPath2;
-
-            //toplam değişken boyutunu alıyoruz.
-            int size = 0;
-            if (!modifiedPath2.Contains("Variable"))
-            {
-                modifiedPath2 = Path.Combine(modifiedPath2, "Variable");
-            }
-
-
-            foreach (string item in variable)
-            {
-
-                string varibleType = item.Replace(".txt", "");
-                int varSize = 0;
-                switch (varibleType)
-                {
-                    case "uint8_t":
-                        varSize = 1;
-                        break;
-                    case "uint16_t":
-                        varSize = 2;
-                        break;
-                    case "uint32_t":
-                        varSize = 4;
-                        break;
-                    case "float32_t":
-                        varSize = 4;
-                        break;
-                    case "float64_t": //double
-                        varSize = 8;
-                        break;
-
-
-                    case "uint8_array_t":
-                        break;
-                    case "uint16_array_t":
-                        break;
-                    case "float32_array_t":
-                        break;
-                    case "float64_array_t": //double
-                        break;
-                    default:
-                        break;
-                }
-
-                switch (varibleType)
-                {
-                    case "uint8_t":
-                        varibleType = "char";
-                        break;
-                    case "uint16_t":
-                        varibleType = "int";
-                        break;
-                    case "uint32_t":
-                        varibleType = "long";
-                        break;
-                    case "float32_t":
-                        varibleType = "float";
-                        break;
-                    case "float64_t": //double
-                        varibleType = "double";
-                        break;
-
-                    case "uint8_array_t":
-                        break;
-                    case "uint16_array_t":
-                        break;
-                    case "float32_array_t":
-                        break;
-                    case "float64_array_t": //double
-                        break;
-                    default:
-                        break;
-
-                }
-
-                int countVar = 0;
-                string modifiedPath3 = Path.Combine(modifiedPath2, item);
-                if (item == variableFile)
-                {
-                    var tb = CurrentTB.Lines;
-
-                    foreach (string tbText in tb)
-                    {
-
-                        if (string.IsNullOrEmpty(tbText))
-                            continue;
-
-                        variableControl.Add(tbText.Split(' ')[1].Replace(";", ""));
-                        countVar++;
-                        
-                    }
-                    size += countVar * varSize;
-                    continue;
-                }
-
-                if (File.Exists(modifiedPath3))
-                {
-                    string[] lines1 = File.ReadAllLines(modifiedPath3);
-
-                    foreach (var item2 in lines1)
-                    {
-                        if (string.IsNullOrEmpty(item2))
-                            continue;
-                        variableControl.Add(item2.Split(' ')[1].Replace(";", ""));
-                        countVar++;
-                        
-                    }
-
-                }
-                size += countVar * varSize;
-
-            }
-
-
-            for (int i = 0; i < variableControl.Count(); i++)
-            {
-                string val = variableControl[i];
-                for (int j = 0; j < variableControl.Count(); j++)
-                {
-                    if (i == j)
-                        continue;
-
-                    if (variableControl[j] == val)
-                    {
-                        MessageBox.Show("Bu değişken zaten eklenmiş : " + val);
-                        return false;
-                    }
-
-                }
-            }
-
-
-
-            MessageBox.Show(size + " total: " + totalVariableSize);
-
-            if (size > totalVariableSize)
-            {
-                MessageBox.Show("Maksimum değişken sayısına ulaştınız\nSilinmesi gereken byte sayısı : " + (size-totalVariableSize));
-                return false;
-            }
-
-
-
-
-            return true;
-        }
 
         async void tb_TextChangedDelayed(object sender, TextChangedEventArgs e)
         {
             await Task.Delay(100);
 
-            var code = CurrentTB.Text;
-            string filePath = CurrentTB.Tag as string;
+            var code = tsFiles.getCurrentTB().Text;
+            string filePath = tsFiles.getCurrentTB().Tag as string;
             string parentDirectoryName = "";
 
             if (!string.IsNullOrEmpty(filePath))
@@ -887,7 +651,7 @@ namespace Tester
 
             else
             {
-                var tab = CurrentTB.Parent as FATabStripItem;
+                var tab = tsFiles.getCurrentTB().Parent as FATabStripItem;
                 if (tab != null)
                 {
                     filePath = tab.Tag as string;
@@ -912,8 +676,8 @@ namespace Tester
             //var syntaxTree = syntaxChecker.GetSyntaxTree(code);
             //syntaxChecker.CheckSyntaxIssues(syntaxTree);
 
-            CurrentTB.Range.ClearStyle(errorStyle);
-            CurrentTB.Range.ClearFoldingMarkers();
+            tsFiles.getCurrentTB().Range.ClearStyle(errorStyle);
+            tsFiles.getCurrentTB().Range.ClearFoldingMarkers();
             errorList.Items.Clear();
 
 
@@ -948,7 +712,7 @@ namespace Tester
 
                 }
                 // Hatalı bölgeyi vurgulamak için range (aralık) oluştur
-                var range = CurrentTB.GetRange(new Place(error.startColumn, error.startLine), new Place(error.endColumn, error.startLine));
+                var range = tsFiles.getCurrentTB().GetRange(new Place(error.startColumn, error.startLine), new Place(error.endColumn, error.startLine));
                 errorList.Items.Add(new ListViewItem(new string[] { "", $"{error.errorCode}", $"{error.errorMessage}", parentDirectoryName, $"{error.startLine + 1}" }));
 
                 // Hatalı bölgeye stil ekle
@@ -1240,7 +1004,7 @@ namespace Tester
                 if (int.TryParse(selectedItem.SubItems[4].Text, out int lineNumber))
                 {
                     // Aktif FastColoredTextBox'ı bul
-                    FastColoredTextBox tb = CurrentTB;
+                    FastColoredTextBox tb = tsFiles.getCurrentTB();
                     if (tb != null)
                     {
                         // Satırı vurgula
@@ -1432,7 +1196,7 @@ namespace Tester
 
                     if (result == DialogResult.Yes)
                     {
-                        bool saveVal = await Save(e.Item);
+                        bool saveVal = await _fileService.Save(e.Item,sfdMain,activeProjectPath);
 
                         if (!saveVal)
                         {
@@ -1459,115 +1223,28 @@ namespace Tester
 
         }
 
-        private async Task<bool> Save(FATabStripItem tab)
-        {
-            bool res = false;
-            try
-            {
-                res = await variableLimitControl();
-
-            }
-            catch (Exception)
-            {
-                res = true;
-            }
-
-            if (res == false)
-            {
-                return false;
-            }
-            if (tab.Controls[0] is FastColoredTextBox tb )
-            {
-                if (tab.Tag == null)
-                {
-                    if (sfdMain.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                        return false;
-                    tab.Title = Path.GetFileName(sfdMain.FileName);
-                    tab.Tag = sfdMain.FileName;
-                }
-
-                try
-                {
-
-                    File.WriteAllText(tab.Tag as string, tb.Text);
-
-                    await SaveVariableToFile(activeProjectPath);
-                    tb.IsChanged = false;
-                }
-                catch (Exception ex)
-                {
-                    if (MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
-                        return await Save(tab);
-                    else
-                        return false;
-                }
-
-                tb.Invalidate();
-            }
-
-            return true;
-        }
-
-        private async Task SaveVariableToFile(string fileName)
-        {
-            string directoryPath = Path.GetDirectoryName(fileName);
-
-            getValueTagForAutoComplate(fileName, true);
-
-
-            for (int iTab = 0; iTab < tsFiles.Items.Count; iTab++)
-            {
-                if (tsFiles.Items[iTab].Tag != null)
-                {
-                    string directoryPath2 = Path.GetDirectoryName(tsFiles.Items[iTab].Tag.ToString());
-
-                    if (tsFiles.Items[iTab].Controls[0] is FastColoredTextBox tb)
-                    {
-                        if (directoryPath2 == directoryPath)
-                        {
-                            // Autocomplete menüye erişmek için
-                            var tbInfo = tb.Tag as TbInfo;
-                            if (tbInfo != null)
-                            {
-                                var popupMenu = tbInfo.popupMenu;
-                                if (popupMenu != null)
-                                { 
-
-                                    popupMenu.Items.Refresh();
-                                    // Burada popupMenu üzerinde işlemler yapabilirsiniz
-                                    // Örneğin, menüyü yeniden oluşturabilirsiniz:
-                                    BuildAutocompleteMenu(popupMenu);
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
-
-
-            await Task.Delay(100);
-        }
 
         private async void saveToolStripMenuItem_Click(object sender, EventArgs e)
         { 
-            if (tsFiles.SelectedItem != null)
-                await Save(tsFiles.SelectedItem);
+            if (tsFiles != null)
+            {
+                await _fileService.Save(tsFiles.getCurrentTB().Parent as FATabStripItem, sfdMain,activeProjectPath);
+        
+            }
         }
-
         private async void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tsFiles.SelectedItem != null)
+            if (tsFiles != null)
             {
-                bool saveVal = await Save(tsFiles.SelectedItem);
+                bool saveVal = await _fileService.Save(tsFiles.getCurrentTB().Parent as FATabStripItem, sfdMain, activeProjectPath);
 
-                string oldFile = tsFiles.SelectedItem.Tag as string;
-                tsFiles.SelectedItem.Tag = null;
+                string oldFile = tsFiles.getCurrentTB().Tag as string;
+                tsFiles.getCurrentTB().Tag = null;
                 if (!saveVal)
                     if (oldFile != null)
                     {
-                        tsFiles.SelectedItem.Tag = oldFile;
-                        tsFiles.SelectedItem.Title = Path.GetFileName(oldFile);
+                        tsFiles.getCurrentTB().Tag = oldFile;
+                        tsFiles.GetFATabStrip().Title = Path.GetFileName(oldFile);
                     }
             }
         }
@@ -1583,62 +1260,46 @@ namespace Tester
                 await CreateTab(ofdMain.FileName);
         }
 
-        FastColoredTextBox CurrentTB
-        {
-            get
-            {
-                if (tsFiles.SelectedItem == null)
-                    return null;
-                return (tsFiles.SelectedItem.Controls[0] as FastColoredTextBox);
-            }
-
-            set
-            {
-                tsFiles.SelectedItem = (value.Parent as FATabStripItem);
-                value.Focus();
-            }
-        }
-        
 
         private void cutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.Cut();
+            tsFiles.getCurrentTB().Cut();
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.Copy();
+            tsFiles.getCurrentTB().Copy();
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.Paste();
+            tsFiles.getCurrentTB().Paste();
         }
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.Selection.SelectAll();
+            tsFiles.getCurrentTB().Selection.SelectAll();
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CurrentTB.UndoEnabled)
-                CurrentTB.Undo();
+            if (tsFiles.getCurrentTB().UndoEnabled)
+                tsFiles.getCurrentTB().Undo();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CurrentTB.RedoEnabled)
-                CurrentTB.Redo();
+            if (tsFiles.getCurrentTB().RedoEnabled)
+                tsFiles.getCurrentTB().Redo();
         }
 
         private void tmUpdateInterface_Tick(object sender, EventArgs e)
         {
             try
             {
-                if (CurrentTB != null && tsFiles.Items.Count > 0)
+                if (tsFiles.getCurrentTB() != null && tsFiles.GetFATabStrip().Items.Count > 0)
                 {
-                    var tb = CurrentTB;
+                    var tb = tsFiles.getCurrentTB();
                     undoStripButton.Enabled = undoToolStripMenuItem.Enabled = tb.UndoEnabled;
                     redoStripButton.Enabled = redoToolStripMenuItem.Enabled = tb.RedoEnabled;
                     saveToolStripButton.Enabled = saveToolStripMenuItem.Enabled = tb.IsChanged;
@@ -1669,13 +1330,13 @@ namespace Tester
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            if (CurrentTB != null)
+            if (tsFiles.getCurrentTB() != null)
             {
                 var settings = new PrintDialogSettings();
-                settings.Title = tsFiles.SelectedItem.Title;
+                settings.Title = tsFiles.GetFATabStrip().SelectedItem.Title;
                 settings.Header = "&b&w&b";
                 settings.Footer = "&b&p";
-                CurrentTB.Print(settings);
+                tsFiles.getCurrentTB().Print(settings);
             }
         }
 
@@ -1684,17 +1345,17 @@ namespace Tester
 
         private void tbFind_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '\r' && CurrentTB != null)
+            if (e.KeyChar == '\r' && tsFiles.getCurrentTB() != null)
             {
                 if (matchRanges.Count == 0) // Eğer eşleşmeler yoksa veya arama ilk defa yapılıyorsa
                 {
-                    Range r = tbFindChanged ? CurrentTB.Range.Clone() : CurrentTB.Selection.Clone();
+                    Range r = tbFindChanged ? tsFiles.getCurrentTB().Range.Clone() : tsFiles.getCurrentTB().Selection.Clone();
                     tbFindChanged = false;
-                    r.End = new Place(CurrentTB[CurrentTB.LinesCount - 1].Count, CurrentTB.LinesCount - 1);
+                    r.End = new Place(tsFiles.getCurrentTB()[tsFiles.getCurrentTB().LinesCount - 1].Count, tsFiles.getCurrentTB().LinesCount - 1);
 
                     // Arama desenini oluştur ve tüm metinde eşleşmeleri bul
                     Regex pattern = new Regex(Regex.Escape(tbFind.Text)); // Metni güvenli hale getir
-                    var matches = pattern.Matches(CurrentTB.Text); // Eşleşmeleri al
+                    var matches = pattern.Matches(tsFiles.getCurrentTB().Text); // Eşleşmeleri al
 
                     // Eşleşmeleri range olarak listeye ekleyelim
                     matchRanges.Clear(); // Önceki eşleşmeleri temizle
@@ -1702,9 +1363,9 @@ namespace Tester
                     {
                         int startIndex = match.Index;
                         int length = match.Length;
-                        Place startPlace = CurrentTB.PositionToPlace(startIndex);
-                        Place endPlace = CurrentTB.PositionToPlace(startIndex + length);
-                        matchRanges.Add(new Range(CurrentTB, startPlace, endPlace)); // Eşleşmeyi ekle
+                        Place startPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex);
+                        Place endPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex + length);
+                        matchRanges.Add(new Range(tsFiles.getCurrentTB(), startPlace, endPlace)); // Eşleşmeyi ekle
                     }
 
                     if (matchRanges.Count == 0) // Eşleşme bulunamadıysa
@@ -1727,20 +1388,20 @@ namespace Tester
                 // Mevcut eşleşmeyi seçili hale getirme ve görünür yapma
                 var foundRange = matchRanges[currentMatchIndex];
                 foundRange.Inverse(); // Seçimi ters çevir
-                CurrentTB.Selection = foundRange;
-                CurrentTB.DoSelectionVisible();
+                tsFiles.getCurrentTB().Selection = foundRange;
+                tsFiles.getCurrentTB().DoSelectionVisible();
             }
         }
 
 
         private void findToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.ShowFindDialog();
+            tsFiles.getCurrentTB().ShowFindDialog();
         }
 
         private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.ShowReplaceDialog();
+            tsFiles.getCurrentTB().ShowReplaceDialog();
         }
 
         private void PowerfulCSharpEditor_FormClosing(object sender, FormClosingEventArgs e)
@@ -1770,13 +1431,13 @@ namespace Tester
 
         private void dgvObjectExplorer_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (CurrentTB != null)
+            if (tsFiles.getCurrentTB() != null)
             {
                 var item = explorerList[e.RowIndex];
-                CurrentTB.GoEnd();
-                CurrentTB.SelectionStart = item.position;
-                CurrentTB.DoSelectionVisible();
-                CurrentTB.Focus();
+                tsFiles.getCurrentTB().GoEnd();
+                tsFiles.getCurrentTB().SelectionStart = item.position;
+                tsFiles.getCurrentTB().DoSelectionVisible();
+                tsFiles.getCurrentTB().Focus();
             }
         }
         
@@ -1809,12 +1470,12 @@ namespace Tester
 
         private void tsFiles_TabStripItemSelectionChanged(TabStripItemChangedEventArgs e)
         {
-            if (CurrentTB != null)
+            if (tsFiles.getCurrentTB() != null)
             {
                 errorList.Items.Clear();
 
-                CurrentTB.Focus();
-                string text = CurrentTB.Text;
+                tsFiles.getCurrentTB().Focus();
+                string text = tsFiles.getCurrentTB().Text;
                 ThreadPool.QueueUserWorkItem(
                     (o) => ReBuildObjectExplorer(text)
                 );
@@ -2019,82 +1680,82 @@ namespace Tester
 
         private void autoIndentSelectedTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.DoAutoIndent();
+            tsFiles.getCurrentTB().DoAutoIndent();
         }
 
         private async void btInvisibleChars_Click(object sender, EventArgs e)
         {
-            foreach (FATabStripItem tab in tsFiles.Items)
+            foreach (FATabStripItem tab in tsFiles.GetFATabStrip().Items)
                 await HighlightInvisibleChars((tab.Controls[0] as FastColoredTextBox).Range);
-            if (CurrentTB != null)
-                CurrentTB.Invalidate();
+            if (tsFiles.getCurrentTB() != null)
+                tsFiles.getCurrentTB().Invalidate();
         }
 
         private void btHighlightCurrentLine_Click(object sender, EventArgs e)
         {
-            foreach (FATabStripItem tab in tsFiles.Items)
+            foreach (FATabStripItem tab in tsFiles.GetFATabStrip().Items)
             {
                 if (btHighlightCurrentLine.Checked)
                     (tab.Controls[0] as FastColoredTextBox).CurrentLineColor = currentLineColor;
                 else
                     (tab.Controls[0] as FastColoredTextBox).CurrentLineColor = Color.Transparent;
             }
-            if (CurrentTB != null)
-                CurrentTB.Invalidate();
+            if (tsFiles.getCurrentTB() != null)
+                tsFiles.getCurrentTB().Invalidate();
         }
 
         private void commentSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.InsertLinePrefix("//");
+            tsFiles.getCurrentTB().InsertLinePrefix("//");
         }
 
         private void uncommentSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentTB.RemoveLinePrefix("//");
+            tsFiles.getCurrentTB().RemoveLinePrefix("//");
         }
 
         private void cloneLinesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //expand selection
-            CurrentTB.Selection.Expand();
+            tsFiles.getCurrentTB().Selection.Expand();
             //get text of selected lines
-            string text = Environment.NewLine + CurrentTB.Selection.Text;
+            string text = Environment.NewLine + tsFiles.getCurrentTB().Selection.Text;
             //move caret to end of selected lines
-            CurrentTB.Selection.Start = CurrentTB.Selection.End;
+            tsFiles.getCurrentTB().Selection.Start = tsFiles.getCurrentTB().Selection.End;
             //insert text
-            CurrentTB.InsertText(text);
+            tsFiles.getCurrentTB().InsertText(text);
         }
 
         private void cloneLinesAndCommentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //start autoUndo block
-            CurrentTB.BeginAutoUndo();
+            tsFiles.getCurrentTB().BeginAutoUndo();
             //expand selection
-            CurrentTB.Selection.Expand();
+            tsFiles.getCurrentTB().Selection.Expand();
             //get text of selected lines
-            string text = Environment.NewLine + CurrentTB.Selection.Text;
+            string text = Environment.NewLine + tsFiles.getCurrentTB().Selection.Text;
             //comment lines
-            CurrentTB.InsertLinePrefix("//");
+            tsFiles.getCurrentTB().InsertLinePrefix("//");
             //move caret to end of selected lines
-            CurrentTB.Selection.Start = CurrentTB.Selection.End;
+            tsFiles.getCurrentTB().Selection.Start = tsFiles.getCurrentTB().Selection.End;
             //insert text
-            CurrentTB.InsertText(text);
+            tsFiles.getCurrentTB().InsertText(text);
             //end of autoUndo block
-            CurrentTB.EndAutoUndo();
+            tsFiles.getCurrentTB().EndAutoUndo();
         }
 
         private void bookmarkPlusButton_Click(object sender, EventArgs e)
         {
-            if (CurrentTB == null)
+            if (tsFiles.getCurrentTB() == null)
                 return;
-            CurrentTB.BookmarkLine(CurrentTB.Selection.Start.iLine);
+            tsFiles.getCurrentTB().BookmarkLine(tsFiles.getCurrentTB().Selection.Start.iLine);
         }
 
         private void bookmarkMinusButton_Click(object sender, EventArgs e)
         {
-            if (CurrentTB == null)
+            if (tsFiles.getCurrentTB() == null)
                 return;
-            CurrentTB.UnbookmarkLine(CurrentTB.Selection.Start.iLine);
+            tsFiles.getCurrentTB().UnbookmarkLine(tsFiles.getCurrentTB().Selection.Start.iLine);
         }
 
         private void gotoButton_DropDownOpening(object sender, EventArgs e)
@@ -2112,7 +1773,7 @@ namespace Tester
                         var b = (Bookmark)(o as ToolStripItem).Tag;
                         try
                         {
-                            CurrentTB = b.TB;
+                            tsFiles.GetFATabStrip() = b.TB;
                         }
                         catch (Exception ex)
                         {
@@ -2129,14 +1790,14 @@ namespace Tester
         {
             foreach (FATabStripItem tab in tsFiles.Items)
                 (tab.Controls[0] as FastColoredTextBox).ShowFoldingLines = btShowFoldingLines.Checked;
-            if (CurrentTB != null)
-                CurrentTB.Invalidate();
+            if (tsFiles.getCurrentTB() != null)
+                tsFiles.getCurrentTB().Invalidate();
         }
 
         private void Zoom_click(object sender, EventArgs e)
         {
-            if (CurrentTB != null)
-                CurrentTB.Zoom = int.Parse((sender as ToolStripItem).Tag.ToString());
+            if (tsFiles.getCurrentTB() != null)
+                tsFiles.getCurrentTB().Zoom = int.Parse((sender as ToolStripItem).Tag.ToString());
         }
 
 
@@ -2809,7 +2470,7 @@ namespace Tester
             if  (e.Control && e.KeyCode == Keys.S)// Ctrl-S Save
             {
                 //if (tsFiles.SelectedItem != null)
-                await Save(tsFiles.SelectedItem);
+                await _fileService.Save(tsFiles.getCurrentTB().Parent as FATabStripItem, sfdMain,activeProjectPath);
                 isDataGridViewChanged = false;
                 // Do what you want here
                 e.Handled = true;

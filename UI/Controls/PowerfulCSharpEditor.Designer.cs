@@ -41,6 +41,9 @@
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectLanguagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.turkishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ssMain = new System.Windows.Forms.StatusStrip();
             this.lbWordUnderMouse = new System.Windows.Forms.ToolStripStatusLabel();
             this.btZoom = new System.Windows.Forms.ToolStripSplitButton();
@@ -103,7 +106,6 @@
             this.ilAutocomplete = new System.Windows.Forms.ImageList(this.components);
             this.autocompleteMenu1 = new AutocompleteMenuNS.AutocompleteMenu();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.tsFiles = new FarsiLibrary.Win.FATabStrip();
             this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.dgvObjectExplorer = new System.Windows.Forms.DataGridView();
@@ -131,19 +133,14 @@
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.closeOutput = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.selectLanguagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.turkishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.ssMain.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.cmMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tsFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectExplorer)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -240,14 +237,34 @@
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
-            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // treeViewToolStripMenuItem
             // 
             this.treeViewToolStripMenuItem.Name = "treeViewToolStripMenuItem";
-            this.treeViewToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.treeViewToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.treeViewToolStripMenuItem.Text = "tree view";
             this.treeViewToolStripMenuItem.Click += new System.EventHandler(this.treeViewToolStripMenuItem_Click);
+            // 
+            // selectLanguagesToolStripMenuItem
+            // 
+            this.selectLanguagesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.turkishToolStripMenuItem});
+            this.selectLanguagesToolStripMenuItem.Name = "selectLanguagesToolStripMenuItem";
+            this.selectLanguagesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.selectLanguagesToolStripMenuItem.Text = "Select Languages";
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.englishToolStripMenuItem.Text = "English";
+            // 
+            // turkishToolStripMenuItem
+            // 
+            this.turkishToolStripMenuItem.Name = "turkishToolStripMenuItem";
+            this.turkishToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.turkishToolStripMenuItem.Text = "Turkish";
             // 
             // ssMain
             // 
@@ -794,24 +811,11 @@
             this.autocompleteMenu1.SetAutocompleteMenu(this.richTextBox1, null);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(2, 27);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1060, 132);
+            this.richTextBox1.Size = new System.Drawing.Size(846, 96);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
-            // 
-            // tsFiles
-            // 
-            this.tsFiles.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tsFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsFiles.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.tsFiles.Location = new System.Drawing.Point(0, 0);
-            this.tsFiles.Name = "tsFiles";
-            this.tsFiles.Size = new System.Drawing.Size(732, 325);
-            this.tsFiles.TabIndex = 0;
-            this.tsFiles.Text = "faTabStrip1";
-            this.tsFiles.TabStripItemClosing += new FarsiLibrary.Win.TabStripItemClosingHandler(this.tsFiles_TabStripItemClosing);
-            this.tsFiles.TabStripItemSelectionChanged += new FarsiLibrary.Win.TabStripItemChangedHandler(this.tsFiles_TabStripItemSelectionChanged);
             // 
             // clName
             // 
@@ -858,7 +862,6 @@
             this.dgvObjectExplorer.Size = new System.Drawing.Size(61, 15);
             this.dgvObjectExplorer.TabIndex = 6;
             this.dgvObjectExplorer.VirtualMode = true;
-            this.dgvObjectExplorer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectExplorer_CellContentClick);
             this.dgvObjectExplorer.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvObjectExplorer_CellMouseDoubleClick);
             this.dgvObjectExplorer.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.dgvObjectExplorer_CellValueNeeded);
             // 
@@ -875,11 +878,10 @@
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 27);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(2);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(123, 298);
             this.treeView1.TabIndex = 1;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
             // 
@@ -910,7 +912,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -920,7 +922,6 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.tsFiles);
             this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.splitContainer1.Size = new System.Drawing.Size(858, 325);
             this.splitContainer1.SplitterDistance = 123;
@@ -971,7 +972,7 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 51);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -995,7 +996,7 @@
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.ItemSize = new System.Drawing.Size(82, 25);
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.Padding = new System.Drawing.Point(20, 3);
             this.tabControl2.SelectedIndex = 0;
@@ -1008,9 +1009,9 @@
             this.tabPage3.Controls.Add(this.errorList);
             this.tabPage3.Controls.Add(this.toolStrip2);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage3.Size = new System.Drawing.Size(850, 125);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Hata Listesi";
@@ -1029,7 +1030,7 @@
             this.errorList.FullRowSelect = true;
             this.errorList.HideSelection = false;
             this.errorList.Location = new System.Drawing.Point(2, 27);
-            this.errorList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.errorList.Margin = new System.Windows.Forms.Padding(2);
             this.errorList.Name = "errorList";
             this.errorList.Size = new System.Drawing.Size(846, 96);
             this.errorList.TabIndex = 1;
@@ -1092,10 +1093,10 @@
             this.tabPage4.Controls.Add(this.richTextBox1);
             this.tabPage4.Controls.Add(this.toolStrip3);
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPage4.Size = new System.Drawing.Size(1064, 161);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage4.Size = new System.Drawing.Size(850, 125);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Çıktı";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1109,7 +1110,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip3.Size = new System.Drawing.Size(1060, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(846, 25);
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -1131,27 +1132,6 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // selectLanguagesToolStripMenuItem
-            // 
-            this.selectLanguagesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.englishToolStripMenuItem,
-            this.turkishToolStripMenuItem});
-            this.selectLanguagesToolStripMenuItem.Name = "selectLanguagesToolStripMenuItem";
-            this.selectLanguagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.selectLanguagesToolStripMenuItem.Text = "Select Languages";
-            // 
-            // englishToolStripMenuItem
-            // 
-            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.englishToolStripMenuItem.Text = "English";
-            // 
-            // turkishToolStripMenuItem
-            // 
-            this.turkishToolStripMenuItem.Name = "turkishToolStripMenuItem";
-            this.turkishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.turkishToolStripMenuItem.Text = "Turkish";
             // 
             // PowerfulCSharpEditor
             // 
@@ -1178,13 +1158,11 @@
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
             this.cmMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tsFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectExplorer)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -1274,8 +1252,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private AutocompleteMenuNS.AutocompleteMenu autocompleteMenu1;
-        private FarsiLibrary.Win.FATabStrip tsFiles;
-        private System.Windows.Forms.DataGridView dgvObjectExplorer;
+        public System.Windows.Forms.DataGridView dgvObjectExplorer;
         private System.Windows.Forms.DataGridViewImageColumn clImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn clName;
         private System.Windows.Forms.Button button1;
@@ -1303,7 +1280,7 @@
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton closeOutput;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ListView errorList;
+        public System.Windows.Forms.ListView errorList;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader errorCode;
         private System.Windows.Forms.ColumnHeader description;
