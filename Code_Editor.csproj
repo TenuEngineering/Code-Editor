@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AnalyzeCode.cs" />
+    <Compile Include="Core\Models\ErrorInfo.cs" />
     <Compile Include="Core\variableSizeControl.cs" />
     <Compile Include="Services\Autocomplate\AutocompleteService.cs" />
     <Compile Include="Core\Method\MethodAutocomplateItem2.cs" />
@@ -153,10 +154,10 @@
       <DependentUpon>String.tr.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\SyntaxChecker.cs" />
-    <Compile Include="UI\Forms\tabControl.cs">
+    <Compile Include="UI\Controls\tabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\tabControl.Designer.cs">
+    <Compile Include="UI\Controls\tabControl.Designer.cs">
       <DependentUpon>tabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="VisibleRangeChangedDelayedSample.cs">
@@ -191,7 +192,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>String.tr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\tabControl.resx">
+    <EmbeddedResource Include="UI\Controls\tabControl.resx">
       <DependentUpon>tabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisibleRangeChangedDelayedSample.resx">
@@ -283,7 +284,10 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Triggers\" />
+    <Folder Include="Core\Triggers\error_list_triggers\" />
+    <Folder Include="Core\Triggers\fctb_triggers\" />
+    <Folder Include="Core\Triggers\tab_strip_triggers\" />
+    <Folder Include="Core\Triggers\tree_triggers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

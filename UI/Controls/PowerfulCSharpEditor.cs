@@ -25,6 +25,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Collections;
 using Tester.Core;
 using Tester.UI.Forms;
+using Tester.Core.Models;
 
 namespace Tester
 {
@@ -32,11 +33,11 @@ namespace Tester
     // deneme
     public partial class PowerfulCSharpEditor : Form
     {
-        private readonly FileService _fileService;
-        private readonly SyntaxChecker _syntaxChecker;
-        private readonly AutocompleteService _autocompleteService;
-        private readonly TreeViewService _treeViewService;
-        private readonly RuleEngine _ruleEngine;
+        private FileService _fileService;
+        private SyntaxChecker _syntaxChecker;
+        private AutocompleteService _autocompleteService;
+        private TreeViewService _treeViewService;
+        private RuleEngine _ruleEngine;
         
 
         string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
@@ -192,7 +193,8 @@ namespace Tester
         {
             await InitializeTreeView();
 
-            splitContainer2.Controls.Add(tsFiles);
+            tsFiles.Dock = DockStyle.Fill;
+            splitContainer1.Panel2.Controls.Add(tsFiles);
             //  LoadProjectContents();
             //await LoadDirectory(this.workspaceFullPath);
 
@@ -251,7 +253,6 @@ namespace Tester
         }
 
 
-        private Style sameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(50, Color.Gray)));
 
 
         void popupMenu_Opening(object sender, CancelEventArgs e)
@@ -546,32 +547,6 @@ namespace Tester
             }
         }
 
-        private void BuildAutocompleteMenu(AutocompleteMenu popupMenu)
-        {
-            List<AutocompleteItem> items = new List<AutocompleteItem>();
-
-            foreach (var item in snippets)
-                items.Add(new SnippetAutocompleteItem(item) { ImageIndex = 1 });
-            foreach (var item in declarationSnippets)
-                items.Add(new DeclarationSnippet(item) { ImageIndex = 0 });
-            foreach (var item in methods)
-                items.Add(new MethodAutocompleteItem(item) { ImageIndex = 2 });
-            foreach (var item in sources)
-                items.Add(new MethodAutocompleteItem2(item));
-            foreach (var item in variableAutoComplate)
-                items.Add(new MethodAutocompleteItem2(item));
-            foreach (var item in keywords)
-                items.Add(new AutocompleteItem(item));
-
-            items.Add(new InsertSpaceSnippet());
-            items.Add(new InsertSpaceSnippet(@"^(\w+)([=<>!:]+)(\w+)$"));
-            items.Add(new InsertEnterSnippet());
-
-            //set as autocomplete source
-            popupMenu.Items.SetAutocompleteItems(items);
-            
-            popupMenu.SearchPattern = @"[\w\.:=!<>]";
-        }
 
         async void tb_KeyDown(object sender, KeyEventArgs e)
         {
@@ -613,9 +588,10 @@ namespace Tester
                     lastNavigatedDateTime = tb[tb.Selection.Start.iLine].LastVisit;
                 }
             }
+            Style sameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(50, Color.Gray)));
 
-            //highlight same words
-            tb.VisibleRange.ClearStyle(sameWordsStyle);
+        //highlight same words
+        tb.VisibleRange.ClearStyle(sameWordsStyle);
             if (!tb.Selection.IsEmpty)
                 return;//user selected diapason
             //get fragment around caret
@@ -723,13 +699,7 @@ namespace Tester
             }
 
         }
-        public class ErrorInfo
-        {
-            public int LineNumber { get; set; }
-            public int ErrorStartIndex { get; set; }
-            public int ErrorEndIndex { get; set; }
-            public string ErrDescription { get; set; }
-        }
+
 
         Dictionary<int,ErrorInfo> errorInfoDict = new Dictionary<int,ErrorInfo>();
 
@@ -1152,25 +1122,6 @@ namespace Tester
 
         // kuralları ayrı bir iş parçacığında kontrol et
 
-        enum ExplorerItemType
-        {
-            Class, Method, Property, Event
-        }
-
-        class ExplorerItem
-        {
-            public ExplorerItemType type;
-            public string title;
-            public int position;
-        }
-
-        class ExplorerItemComparer : IComparer<ExplorerItem>
-        {
-            public int Compare(ExplorerItem x, ExplorerItem y)
-            {
-                return x.title.CompareTo(y.title);
-            }
-        }
 
         private async Task InitializeDataGridViewEvents(DataGridView dgv)
         {
@@ -1244,7 +1195,7 @@ namespace Tester
                     if (oldFile != null)
                     {
                         tsFiles.getCurrentTB().Tag = oldFile;
-                        tsFiles.GetFATabStrip().Title = Path.GetFileName(oldFile);
+                        //tsFiles.GetFATabStrip().Title = Path.GetFileName(oldFile);
                     }
             }
         }
@@ -1257,7 +1208,7 @@ namespace Tester
         private async void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ofdMain.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                await CreateTab(ofdMain.FileName);
+                await tsFiles.CreateTab(ofdMain.FileName);
         }
 
 
@@ -1408,7 +1359,7 @@ namespace Tester
         {
             int counter2 = 0;
             List<FATabStripItem> list = new List<FATabStripItem>();
-            foreach (FATabStripItem tab in tsFiles.Items)
+            foreach (FATabStripItem tab in tsFiles.GetFATabStrip().Items)
                 list.Add(tab);
             foreach (var tab in list)
             {
@@ -1420,7 +1371,7 @@ namespace Tester
                     e.Cancel = true;
                     return;
                 }
-                tsFiles.RemoveTab(tab);
+                tsFiles.GetFATabStrip().RemoveTab(tab);
             }
             if (counter2 == 0)
             {
@@ -1499,9 +1450,9 @@ namespace Tester
             DateTime max = new DateTime();
             int iLine = -1;
             FastColoredTextBox tb = null;
-            for (int iTab = 0; iTab < tsFiles.Items.Count; iTab++)
+            for (int iTab = 0; iTab < tsFiles.GetFATabStrip().Items.Count; iTab++)
             {
-                var t = (tsFiles.Items[iTab].Controls[0] as FastColoredTextBox);
+                var t = (tsFiles.GetFATabStrip().Items[iTab].Controls[0] as FastColoredTextBox);
                 for (int i = 0; i < t.LinesCount; i++)
                     if (t[i].LastVisit < lastNavigatedDateTime && t[i].LastVisit > max)
                     {
@@ -1512,7 +1463,7 @@ namespace Tester
             }
             if (iLine >= 0)
             {
-                tsFiles.SelectedItem = (tb.Parent as FATabStripItem);
+                tsFiles.GetFATabStrip().SelectedItem = (tb.Parent as FATabStripItem);
                 tb.Navigate(iLine);
                 lastNavigatedDateTime = tb[iLine].LastVisit;
                 Console.WriteLine("Backward: " + lastNavigatedDateTime);
@@ -1529,9 +1480,9 @@ namespace Tester
             DateTime min = DateTime.Now;
             int iLine = -1;
             FastColoredTextBox tb = null;
-            for (int iTab = 0; iTab < tsFiles.Items.Count; iTab++)
+            for (int iTab = 0; iTab < tsFiles.GetFATabStrip().Items.Count; iTab++)
             {
-                var t = (tsFiles.Items[iTab].Controls[0] as FastColoredTextBox);
+                var t = (tsFiles.GetFATabStrip().Items[iTab].Controls[0] as FastColoredTextBox);
                 for (int i = 0; i < t.LinesCount; i++)
                     if (t[i].LastVisit > lastNavigatedDateTime && t[i].LastVisit < min)
                     {
@@ -1542,7 +1493,7 @@ namespace Tester
             }
             if (iLine >= 0)
             {
-                tsFiles.SelectedItem = (tb.Parent as FATabStripItem);
+                tsFiles.GetFATabStrip().SelectedItem = (tb.Parent as FATabStripItem);
                 tb.Navigate(iLine);
                 lastNavigatedDateTime = tb[iLine].LastVisit;
                 Console.WriteLine("Forward: " + lastNavigatedDateTime);
@@ -1552,130 +1503,6 @@ namespace Tester
             }
             else
                 return false;
-        }
-
-        /// <summary>
-        /// This item appears when any part of snippet text is typed
-        /// </summary>
-        class DeclarationSnippet : SnippetAutocompleteItem
-        {
-            public DeclarationSnippet(string snippet)
-                : base(snippet)
-            {
-            }
-
-            public override CompareResult Compare(string fragmentText)
-            {
-                var pattern = Regex.Escape(fragmentText);
-                if (Regex.IsMatch(Text, "\\b" + pattern, RegexOptions.IgnoreCase))
-                    return CompareResult.Visible;
-                return CompareResult.Hidden;
-            }
-        }
-
-        /// <summary>
-        /// Divides numbers and words: "123AND456" -> "123 AND 456"
-        /// Or "i=2" -> "i = 2"
-        /// </summary>
-        class InsertSpaceSnippet : AutocompleteItem
-        {
-            string pattern;
-
-            public InsertSpaceSnippet(string pattern)
-                : base("")
-            {
-                this.pattern = pattern;
-            }
-
-            public InsertSpaceSnippet()
-                : this(@"^(\d+)([a-zA-Z_]+)(\d*)$")
-            {
-            }
-
-            public override CompareResult Compare(string fragmentText)
-            {
-                if (Regex.IsMatch(fragmentText, pattern))
-                {
-                    Text = InsertSpaces(fragmentText);
-                    if (Text != fragmentText)
-                        return CompareResult.Visible;
-                }
-                return CompareResult.Hidden;
-            }
-
-            public string InsertSpaces(string fragment)
-            {
-                var m = Regex.Match(fragment, pattern);
-                if (m == null)
-                    return fragment;
-                if (m.Groups[1].Value == "" && m.Groups[3].Value == "")
-                    return fragment;
-                return (m.Groups[1].Value + " " + m.Groups[2].Value + " " + m.Groups[3].Value).Trim();
-            }
-
-            public override string ToolTipTitle
-            {
-                get
-                {
-                    return Text;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Inerts line break after '}'
-        /// </summary>
-        class InsertEnterSnippet : AutocompleteItem
-        {
-            Place enterPlace = Place.Empty;
-
-            public InsertEnterSnippet()
-                : base("[Line break]")
-            {
-            }
-
-            public override CompareResult Compare(string fragmentText)
-            {
-                var r = Parent.Fragment.Clone();
-                while (r.Start.iChar > 0)
-                {
-                    if (r.CharBeforeStart == '}')
-                    {
-                        enterPlace = r.Start;
-                        return CompareResult.Visible;
-                    }
-
-                    r.GoLeftThroughFolded();
-                }
-
-                return CompareResult.Hidden;
-            }
-
-            public override string GetTextForReplace()
-            {
-                //extend range
-                Range r = Parent.Fragment;
-                Place end = r.End;
-                r.Start = enterPlace;
-                r.End = r.End;
-                //insert line break
-                return Environment.NewLine + r.Text;
-            }
-
-            public override void OnSelected(AutocompleteMenu popupMenu, SelectedEventArgs e)
-            {
-                base.OnSelected(popupMenu, e);
-                if (Parent.Fragment.tb.AutoIndent)
-                    Parent.Fragment.tb.DoAutoIndent();
-            }
-
-            public override string ToolTipTitle
-            {
-                get
-                {
-                    return "Insert line break after '}'";
-                }
-            }
         }
 
         private void autoIndentSelectedTextToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1761,7 +1588,7 @@ namespace Tester
         private void gotoButton_DropDownOpening(object sender, EventArgs e)
         {
             gotoButton.DropDownItems.Clear();
-            foreach (Control tab in tsFiles.Items)
+            foreach (Control tab in tsFiles.GetFATabStrip().Items)
             {
                 FastColoredTextBox tb = tab.Controls[0] as FastColoredTextBox;
                 foreach (var bookmark in tb.Bookmarks)
@@ -1773,7 +1600,7 @@ namespace Tester
                         var b = (Bookmark)(o as ToolStripItem).Tag;
                         try
                         {
-                            tsFiles.GetFATabStrip() = b.TB;
+                            //tsFiles.getCurrentTB() = b.TB;
                         }
                         catch (Exception ex)
                         {
@@ -1788,7 +1615,7 @@ namespace Tester
 
         private void btShowFoldingLines_Click(object sender, EventArgs e)
         {
-            foreach (FATabStripItem tab in tsFiles.Items)
+            foreach (FATabStripItem tab in tsFiles.GetFATabStrip().Items)
                 (tab.Controls[0] as FastColoredTextBox).ShowFoldingLines = btShowFoldingLines.Checked;
             if (tsFiles.getCurrentTB() != null)
                 tsFiles.getCurrentTB().Invalidate();
@@ -1946,7 +1773,7 @@ namespace Tester
                         {
                             if (File.Exists(filePath))
                             {
-                                await CreateTab(filePath);
+                                await tsFiles.CreateTab(filePath);
                                 string[] lines = File.ReadAllLines(filePath);
                                 StringBuilder numberedText = new StringBuilder();
                             }
@@ -2408,7 +2235,7 @@ namespace Tester
              
         private async void convertCode_Click(object sender, EventArgs e){
 
-            FATabStripItem activeTab = tsFiles.SelectedItem;
+            FATabStripItem activeTab = tsFiles.GetFATabStrip().SelectedItem;
 
             if (activeTab != null)
             {
@@ -2519,71 +2346,6 @@ namespace Tester
             }
         }
     }
-    public class MethodAutocompleteItem2 : MethodAutocompleteItem
-    {
-        string firstPart;
-        string lastPart;
-
-        public MethodAutocompleteItem2(string text)
-            : base(text)
-        {
-            var i = text.LastIndexOf('.');
-            if (i < 0)
-                firstPart = text;
-            else
-            {
-                firstPart = text.Substring(0, i);
-                lastPart = text.Substring(i + 1);
-            }
-        }
-
-        public override CompareResult Compare(string fragmentText)
-        {
-            int i = fragmentText.LastIndexOf('.');
-
-            if (i < 0)
-            {
-                if (firstPart.StartsWith(fragmentText) && string.IsNullOrEmpty(lastPart))
-                    return CompareResult.VisibleAndSelected;
-                //if (firstPart.ToLower().Contains(fragmentText.ToLower()))
-                //  return CompareResult.Visible;
-            }
-            else
-            {
-                var fragmentFirstPart = fragmentText.Substring(0, i);
-                var fragmentLastPart = fragmentText.Substring(i + 1);
-
-
-                if (firstPart != fragmentFirstPart)
-                    return CompareResult.Hidden;
-
-                if (lastPart != null && lastPart.StartsWith(fragmentLastPart))
-                    return CompareResult.VisibleAndSelected;
-
-                if (lastPart != null && lastPart.ToLower().Contains(fragmentLastPart.ToLower()))
-                    return CompareResult.Visible;
-
-            }
-
-            return CompareResult.Hidden;
-        }
-
-        public override string GetTextForReplace()
-        {
-            if (lastPart == null)
-                return firstPart;
-
-            return firstPart + "." + lastPart;
-        }
-
-        public override string ToString()
-        {
-            if (lastPart == null)
-                return firstPart;
-
-            return lastPart;
-        }
-    }
 
     public class InvisibleCharsRenderer : Style
     {
@@ -2617,10 +2379,5 @@ namespace Tester
                 }
             }
         }
-    }
-
-    public class TbInfo
-    {
-        public AutocompleteMenu popupMenu;
     }
 }

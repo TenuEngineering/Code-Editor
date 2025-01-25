@@ -73,3 +73,4 @@ C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x8
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Code_Edi.F07EAE7F.Up2Date
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.exe
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.pdb
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.UI.Forms.tabControl.resources

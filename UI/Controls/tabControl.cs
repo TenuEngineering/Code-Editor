@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using Tester.Core;
 using Tester.Core.Models;
 using Tester.Services;
+using FastColoredTextBoxNS;
 
 namespace Tester.UI.Forms
 {
@@ -32,6 +33,8 @@ namespace Tester.UI.Forms
 
         AutocompleteService autocompleteService = new AutocompleteService();
         FileService fileService = new FileService();
+        private Style sameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(50, Color.Gray)));
+
         FastColoredTextBox CurrentTB
         {
             get
@@ -98,7 +101,7 @@ namespace Tester.UI.Forms
         {
             if (CurrentTB != null)
             {
-                errorList.Items.Clear();
+                //errorList.Items.Clear();
 
                 CurrentTB.Focus();
                 string text = CurrentTB.Text;
@@ -171,8 +174,8 @@ namespace Tester.UI.Forms
                     new Action(() =>
                     {
                         explorerList = list;
-                        dgvObjectExplorer.RowCount = explorerList.Count;
-                        dgvObjectExplorer.Invalidate();
+                        //dgvObjectExplorer.RowCount = explorerList.Count;
+                        //dgvObjectExplorer.Invalidate();
                     })
                 );
             }
@@ -205,17 +208,17 @@ namespace Tester.UI.Forms
                 tb.Focus();
                 tb.DelayedTextChangedInterval = 1000;
                 tb.DelayedEventsInterval = 500;
-                tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(tb_TextChangedDelayed);
-                tb.SelectionChangedDelayed += new EventHandler(tb_SelectionChangedDelayed);
-                tb.TextChanged += FastColoredTextBox_TextChanged;
-                tb.KeyDown += new KeyEventHandler(tb_KeyDown);
-                tb.MouseMove += new MouseEventHandler(tb_MouseMove);
-                tb.ChangedLineColor = changedLineColor;
+                //tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(tb_TextChangedDelayed);
+                //tb.SelectionChangedDelayed += new EventHandler(tb_SelectionChangedDelayed);
+                //tb.TextChanged += FastColoredTextBox_TextChanged;
+                //tb.KeyDown += new KeyEventHandler(tb_KeyDown);
+                //tb.MouseMove += new MouseEventHandler(tb_MouseMove);
+                //tb.ChangedLineColor = changedLineColor;
 
 
-                if (btHighlightCurrentLine.Checked)
-                    tb.CurrentLineColor = currentLineColor;
-                tb.ShowFoldingLines = btShowFoldingLines.Checked;
+                //if (btHighlightCurrentLine.Checked)
+                //    tb.CurrentLineColor = currentLineColor;
+                //tb.ShowFoldingLines = btShowFoldingLines.Checked;
                 tb.HighlightingRangeType = HighlightingRangeType.VisibleRange;
                 //tool error show
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tester.Services.Autocomplate;
 using Tester.Core;
+using Tester.Core.Models;
 
 namespace Tester.Core
 {
