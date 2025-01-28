@@ -574,7 +574,6 @@
             this.tbFind.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbFind.Name = "tbFind";
             this.tbFind.Size = new System.Drawing.Size(100, 27);
-            this.tbFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFind_KeyPress);
             // 
             // toolStripLabel1
             // 
