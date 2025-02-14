@@ -95,8 +95,7 @@ namespace Tester
                     InsertNodeAtTop(thisWeekNode, projectNode);
                 }
 
-                    
-
+                   
             }
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add(todayNode);
@@ -111,7 +110,7 @@ namespace Tester
 
         private async void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            await Task.Delay(50);
+            await Task.Delay(10);
             await openProject(e);
 
 

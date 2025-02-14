@@ -11,7 +11,7 @@ namespace Tester.Core
 {
     public class Navigate
     {
-        tabControl tsFiles = new tabControl();
+        public tabControl tsFiles;
         public DateTime lastNavigatedDateTime = DateTime.Now;
 
         public bool NavigateBackward()

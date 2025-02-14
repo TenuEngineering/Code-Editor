@@ -40,8 +40,9 @@ namespace Tester
         private AutocompleteService _autocompleteService;
         private TreeViewService _treeViewService;
         private RuleEngine _ruleEngine;
+        private tabControl tsFiles;
 
-        Navigate navigate = new Navigate();
+        Navigate navigate;
 
         string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
         string[] methods = { "Equals()", "GetHashCode()", "GetType()", "ToString()" };
@@ -150,7 +151,7 @@ namespace Tester
         string activeProjectPath;
         int controlCounter = 0;
         string rulesPath;
-        tabControl tsFiles = new tabControl();
+        
         
         public PowerfulCSharpEditor()
         {
@@ -161,11 +162,13 @@ namespace Tester
             copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
             cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
             pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+            tsFiles = new tabControl();
             _fileService = new FileService();
             _syntaxChecker = new SyntaxChecker();
             _autocompleteService = new AutocompleteService();
             _treeViewService = new TreeViewService();
             _ruleEngine = new RuleEngine();
+            navigate =new Navigate();
 
         }
 
@@ -188,7 +191,13 @@ namespace Tester
             copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
             cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
             pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-
+            tsFiles = new tabControl();
+            _fileService = new FileService();
+            _syntaxChecker = new SyntaxChecker();
+            _autocompleteService = new AutocompleteService();
+            _treeViewService = new TreeViewService();
+            _ruleEngine = new RuleEngine();
+            navigate = new Navigate();
 
         }
 

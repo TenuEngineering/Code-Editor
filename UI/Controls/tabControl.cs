@@ -26,13 +26,14 @@ namespace Tester.UI.Forms
         public tabControl()
         {
             InitializeComponent();
+            
         }
 
         // ToolTip işleyicilerini saklamak için bir Dictionary tanımlayın
         Dictionary<int, EventHandler<ToolTipNeededEventArgs>> toolTipHandlers = new Dictionary<int, EventHandler<ToolTipNeededEventArgs>>();
         List<ExplorerItem> explorerList = new List<ExplorerItem>();
         FCTB_Triggers triggers = new FCTB_Triggers();
-
+        
         AutocompleteService autocompleteService = new AutocompleteService();
         FileService fileService = new FileService();
         Color changedLineColor = Color.FromArgb(255, 230, 230, 255);
@@ -214,10 +215,10 @@ namespace Tester.UI.Forms
                 tb.Focus();
                 tb.DelayedTextChangedInterval = 1000;
                 tb.DelayedEventsInterval = 500;
-                tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(triggers.tb_TextChangedDelayed);
+                //tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(triggers.tb_TextChangedDelayed); // AKTİF EDİLECEK
                 tb.SelectionChangedDelayed += new EventHandler(triggers.tb_SelectionChangedDelayed);
                 tb.TextChanged += triggers.FastColoredTextBox_TextChanged;
-                tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
+                //tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
                 tb.MouseMove += new MouseEventHandler(triggers.tb_MouseMove);
                 tb.ChangedLineColor = changedLineColor;
 

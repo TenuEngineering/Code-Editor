@@ -19,7 +19,7 @@ namespace Tester.Core.Triggers.fctb_triggers
 {
     public class FCTB_Triggers
     {
-        tabControl tsFiles = new tabControl();
+        public tabControl tsFiles;
         RuleEngine ruleEngine = new RuleEngine();
         Navigate navigate = new Navigate();
 
@@ -37,98 +37,98 @@ namespace Tester.Core.Triggers.fctb_triggers
 
 
 
+        // !! ÖENMLİ DÜZENLE
+        //public async void tb_TextChangedDelayed(object sender, TextChangedEventArgs e)
+        //{
+        //    await Task.Delay(100);
 
-        public async void tb_TextChangedDelayed(object sender, TextChangedEventArgs e)
-        {
-            await Task.Delay(100);
+        //    var code = tsFiles.getCurrentTB().Text;
+        //    string filePath = tsFiles.getCurrentTB().Tag as string;
+        //    string parentDirectoryName = "";
 
-            var code = tsFiles.getCurrentTB().Text;
-            string filePath = tsFiles.getCurrentTB().Tag as string;
-            string parentDirectoryName = "";
+        //    if (!string.IsNullOrEmpty(filePath))
+        //    {
+        //        DirectoryInfo directoryInfo = Directory.GetParent(filePath);
+        //        if (directoryInfo != null)
+        //        {
+        //            parentDirectoryName = directoryInfo.Parent?.Name;
+        //        }
+        //    }
 
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                DirectoryInfo directoryInfo = Directory.GetParent(filePath);
-                if (directoryInfo != null)
-                {
-                    parentDirectoryName = directoryInfo.Parent?.Name;
-                }
-            }
-
-            else
-            {
-                var tab = tsFiles.getCurrentTB().Parent as FATabStripItem;
-                if (tab != null)
-                {
-                    filePath = tab.Tag as string;
-                    if (!string.IsNullOrEmpty(filePath))
-                    {
-                        DirectoryInfo directoryInfo = Directory.GetParent(filePath);
-                        if (directoryInfo != null)
-                        {
-                            parentDirectoryName = directoryInfo.Parent?.Name;
-                        }
-                    }
-                }
-            }
-
-
-            // code txt üzerine variable klasörünün altındaki değişknelerin txt lerinden değişkenleri code stringine ekle
-
-            var syntaxChecker = new SyntaxChecker();
+        //    else
+        //    {
+        //        var tab = tsFiles.getCurrentTB().Parent as FATabStripItem;
+        //        if (tab != null)
+        //        {
+        //            filePath = tab.Tag as string;
+        //            if (!string.IsNullOrEmpty(filePath))
+        //            {
+        //                DirectoryInfo directoryInfo = Directory.GetParent(filePath);
+        //                if (directoryInfo != null)
+        //                {
+        //                    parentDirectoryName = directoryInfo.Parent?.Name;
+        //                }
+        //            }
+        //        }
+        //    }
 
 
-            //var result = syntaxChecker.CheckSyntax(code);
-            //var syntaxTree = syntaxChecker.GetSyntaxTree(code);
-            //syntaxChecker.CheckSyntaxIssues(syntaxTree);
+        //    // code txt üzerine variable klasörünün altındaki değişknelerin txt lerinden değişkenleri code stringine ekle
 
-            tsFiles.getCurrentTB().Range.ClearStyle(errorStyle);
-            tsFiles.getCurrentTB().Range.ClearFoldingMarkers();
-            errorList.Items.Clear();
+        //    var syntaxChecker = new SyntaxChecker();
 
 
-            var errorPositions = syntaxChecker.GetSyntaxErrorPositions(code);
+        //    //var result = syntaxChecker.CheckSyntax(code);
+        //    //var syntaxTree = syntaxChecker.GetSyntaxTree(code);
+        //    //syntaxChecker.CheckSyntaxIssues(syntaxTree);
 
-            if (errorPositions.Count > 0)
-            {
-                errorCounter = 1;
-            }
+        //    tsFiles.getCurrentTB().Range.ClearStyle(errorStyle);
+        //    tsFiles.getCurrentTB().Range.ClearFoldingMarkers();
+        //    errorList.Items.Clear();
 
-            else
-            {
-                errorCounter = 0;
 
-            }
-            string[] a = new string[]
-            {
-                "Tür veya ad uzayı tanımı yada dosya sonu bekleniyor",
-                "'else' bir deyim başlatamaz.",
-                "Sözdizimi hatası, '(' bekleniyor",
-                ") bekleniyor",
-                "Geçersiz ifade terimi else",
-                "; bekleniyor",
-                "Geçersiz ifade terimi '{'"
-            };
-            await controlRules(sender);
+        //    var errorPositions = syntaxChecker.GetSyntaxErrorPositions(code);
 
-            foreach (var error in errorPositions)
-            {
-                if (a.Contains(error.errorMessage))
-                {
+        //    if (errorPositions.Count > 0)
+        //    {
+        //        errorCounter = 1;
+        //    }
 
-                }
-                // Hatalı bölgeyi vurgulamak için range (aralık) oluştur
-                var range = tsFiles.getCurrentTB().GetRange(new Place(error.startColumn, error.startLine), new Place(error.endColumn, error.startLine));
-                errorList.Items.Add(new ListViewItem(new string[] { "", $"{error.errorCode}", $"{error.errorMessage}", parentDirectoryName, $"{error.startLine + 1}" }));
+        //    else
+        //    {
+        //        errorCounter = 0;
 
-                // Hatalı bölgeye stil ekle
-                range.SetStyle(errorStyle);
+        //    }
+        //    string[] a = new string[]
+        //    {
+        //        "Tür veya ad uzayı tanımı yada dosya sonu bekleniyor",
+        //        "'else' bir deyim başlatamaz.",
+        //        "Sözdizimi hatası, '(' bekleniyor",
+        //        ") bekleniyor",
+        //        "Geçersiz ifade terimi else",
+        //        "; bekleniyor",
+        //        "Geçersiz ifade terimi '{'"
+        //    };
+        //    await controlRules(sender);
 
-                // Hataları MessageBox ile gösterebilir veya başka bir işlem yapabilirsiniz.
-                //MessageBox.Show($"Hata Kodu: {error.errorCode}, Mesaj: {error.errorMessage}, Satır: {error.startLine + 1}");
-            }
+        //    foreach (var error in errorPositions)
+        //    {
+        //        if (a.Contains(error.errorMessage))
+        //        {
 
-        }
+        //        }
+        //        // Hatalı bölgeyi vurgulamak için range (aralık) oluştur
+        //        var range = tsFiles.getCurrentTB().GetRange(new Place(error.startColumn, error.startLine), new Place(error.endColumn, error.startLine));
+        //        errorList.Items.Add(new ListViewItem(new string[] { "", $"{error.errorCode}", $"{error.errorMessage}", parentDirectoryName, $"{error.startLine + 1}" }));
+
+        //        // Hatalı bölgeye stil ekle
+        //        range.SetStyle(errorStyle);
+
+        //        // Hataları MessageBox ile gösterebilir veya başka bir işlem yapabilirsiniz.
+        //        //MessageBox.Show($"Hata Kodu: {error.errorCode}, Mesaj: {error.errorMessage}, Satır: {error.startLine + 1}");
+        //    }
+
+        //}
 
 
         public async void FastColoredTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -192,7 +192,7 @@ namespace Tester.Core.Triggers.fctb_triggers
         }
 
 
-        public async void tb_KeyDown(object sender, KeyEventArgs e)
+        public async void tb_KeyDown(object sender, KeyEventArgs e, FATabStrip tsFiles)
         {
             await Task.Delay(100);
 
@@ -210,65 +210,60 @@ namespace Tester.Core.Triggers.fctb_triggers
                 e.Handled = true;
             }
 
-            if (e.KeyData == (Keys.K | Keys.Control))
-            {
-                //forced show (MinFragmentLength will be ignored)
-                (tsFiles.getCurrentTB().Tag as TbInfo).popupMenu.Show(true);
-                e.Handled = true;
-            }
+
         }
+        // !! Önemli düzenle
+        //public void tbFind_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    FastColoredTextBox tbFind = tsFiles.getCurrentTB();
 
-        public void tbFind_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            FastColoredTextBox tbFind = tsFiles.getCurrentTB();
+        //    if (e.KeyChar == '\r' && tsFiles.getCurrentTB() != null)
+        //    {
+        //        if (matchRanges.Count == 0) // Eğer eşleşmeler yoksa veya arama ilk defa yapılıyorsa
+        //        {
+        //            Range r = tbFindChanged ? tsFiles.getCurrentTB().Range.Clone() : tsFiles.getCurrentTB().Selection.Clone();
+        //            tbFindChanged = false;
+        //            r.End = new Place(tsFiles.getCurrentTB()[tsFiles.getCurrentTB().LinesCount - 1].Count, tsFiles.getCurrentTB().LinesCount - 1);
 
-            if (e.KeyChar == '\r' && tsFiles.getCurrentTB() != null)
-            {
-                if (matchRanges.Count == 0) // Eğer eşleşmeler yoksa veya arama ilk defa yapılıyorsa
-                {
-                    Range r = tbFindChanged ? tsFiles.getCurrentTB().Range.Clone() : tsFiles.getCurrentTB().Selection.Clone();
-                    tbFindChanged = false;
-                    r.End = new Place(tsFiles.getCurrentTB()[tsFiles.getCurrentTB().LinesCount - 1].Count, tsFiles.getCurrentTB().LinesCount - 1);
+        //            // Arama desenini oluştur ve tüm metinde eşleşmeleri bul
+        //            Regex pattern = new Regex(Regex.Escape(tbFind.Text)); // Metni güvenli hale getir
+        //            var matches = pattern.Matches(tsFiles.getCurrentTB().Text); // Eşleşmeleri al
 
-                    // Arama desenini oluştur ve tüm metinde eşleşmeleri bul
-                    Regex pattern = new Regex(Regex.Escape(tbFind.Text)); // Metni güvenli hale getir
-                    var matches = pattern.Matches(tsFiles.getCurrentTB().Text); // Eşleşmeleri al
+        //            // Eşleşmeleri range olarak listeye ekleyelim
+        //            matchRanges.Clear(); // Önceki eşleşmeleri temizle
+        //            foreach (Match match in matches)
+        //            {
+        //                int startIndex = match.Index;
+        //                int length = match.Length;
+        //                Place startPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex);
+        //                Place endPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex + length);
+        //                matchRanges.Add(new Range(tsFiles.getCurrentTB(), startPlace, endPlace)); // Eşleşmeyi ekle
+        //            }
 
-                    // Eşleşmeleri range olarak listeye ekleyelim
-                    matchRanges.Clear(); // Önceki eşleşmeleri temizle
-                    foreach (Match match in matches)
-                    {
-                        int startIndex = match.Index;
-                        int length = match.Length;
-                        Place startPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex);
-                        Place endPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex + length);
-                        matchRanges.Add(new Range(tsFiles.getCurrentTB(), startPlace, endPlace)); // Eşleşmeyi ekle
-                    }
+        //            if (matchRanges.Count == 0) // Eşleşme bulunamadıysa
+        //            {
+        //                MessageBox.Show("Not found.");
+        //                return;
+        //            }
+        //        }
 
-                    if (matchRanges.Count == 0) // Eşleşme bulunamadıysa
-                    {
-                        MessageBox.Show("Not found.");
-                        return;
-                    }
-                }
+        //        // Sonraki eşleşmeye geç
+        //        currentMatchIndex++;
+        //        if (currentMatchIndex >= matchRanges.Count) // Eğer sona ulaştıysak
+        //        {
+        //            MessageBox.Show("No more matches.");
+        //            currentMatchIndex = -1; // İlk başa dön
+        //            matchRanges.Clear(); // Eşleşmeleri temizle
+        //            return;
+        //        }
 
-                // Sonraki eşleşmeye geç
-                currentMatchIndex++;
-                if (currentMatchIndex >= matchRanges.Count) // Eğer sona ulaştıysak
-                {
-                    MessageBox.Show("No more matches.");
-                    currentMatchIndex = -1; // İlk başa dön
-                    matchRanges.Clear(); // Eşleşmeleri temizle
-                    return;
-                }
-
-                // Mevcut eşleşmeyi seçili hale getirme ve görünür yapma
-                var foundRange = matchRanges[currentMatchIndex];
-                foundRange.Inverse(); // Seçimi ters çevir
-                tsFiles.getCurrentTB().Selection = foundRange;
-                tsFiles.getCurrentTB().DoSelectionVisible();
-            }
-        }
+        //        // Mevcut eşleşmeyi seçili hale getirme ve görünür yapma
+        //        var foundRange = matchRanges[currentMatchIndex];
+        //        foundRange.Inverse(); // Seçimi ters çevir
+        //        tsFiles.getCurrentTB().Selection = foundRange;
+        //        tsFiles.getCurrentTB().DoSelectionVisible();
+        //    }
+        //}
         public async void tb_MouseMove(object sender, MouseEventArgs e)
         {
 
