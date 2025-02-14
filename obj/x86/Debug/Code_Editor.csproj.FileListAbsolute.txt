@@ -74,3 +74,14 @@ C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x8
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.exe
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.pdb
 C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Desktop\Code Editor\Tester\obj\x86\Debug\Tester.UI.Forms.tabControl.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Code_Editor.csproj.AssemblyReference.cache
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.anasayfa.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.createProject.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.Languages.String.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.progressBarSet.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.UI.Forms.tabControl.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.VisibleRangeChangedDelayedSample.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.Properties.Resources.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.Languages.String.en.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Tester.Languages.String.tr.resources
+C:\Users\elsat\Dropbox\My PC (LAPTOP-KI9FGA7L)\Documents\GitHub\Code-Editor\obj\x86\Debug\Code_Editor.csproj.GenerateResource.cache

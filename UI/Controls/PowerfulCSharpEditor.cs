@@ -27,6 +27,7 @@ using Tester.Core;
 using Tester.UI.Forms;
 using Tester.Core.Models;
 using Tester.Services;
+using AutocompleteMenuNS;
 
 namespace Tester
 {
