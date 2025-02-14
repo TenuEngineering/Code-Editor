@@ -23,23 +23,30 @@ namespace Tester.UI.Forms
 {
     public partial class tabControl : UserControl
     {
-        public tabControl()
-        {
-            InitializeComponent();
-            
-        }
-
         // ToolTip işleyicilerini saklamak için bir Dictionary tanımlayın
         Dictionary<int, EventHandler<ToolTipNeededEventArgs>> toolTipHandlers = new Dictionary<int, EventHandler<ToolTipNeededEventArgs>>();
         List<ExplorerItem> explorerList = new List<ExplorerItem>();
-        FCTB_Triggers triggers = new FCTB_Triggers();
-        
+        public FCTB_Triggers triggers = new FCTB_Triggers();
+
+
         AutocompleteService autocompleteService = new AutocompleteService();
         FileService fileService = new FileService();
         Color changedLineColor = Color.FromArgb(255, 230, 230, 255);
 
+        public ToolStripStatusLabel lbWordUnderMouse;
 
         private Style sameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(50, Color.Gray)));
+
+        public tabControl()
+        {
+            this.triggers.lbWordUnderMouse = lbWordUnderMouse;
+            InitializeComponent();
+            this.triggers.tsFiles = tsFiles;
+
+        }
+
+
+
 
 
         FastColoredTextBox CurrentTB
@@ -219,6 +226,10 @@ namespace Tester.UI.Forms
                 tb.SelectionChangedDelayed += new EventHandler(triggers.tb_SelectionChangedDelayed);
                 tb.TextChanged += triggers.FastColoredTextBox_TextChanged;
                 //tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
+
+
+                this.triggers.lbWordUnderMouse = lbWordUnderMouse;
+
                 tb.MouseMove += new MouseEventHandler(triggers.tb_MouseMove);
                 tb.ChangedLineColor = changedLineColor;
 

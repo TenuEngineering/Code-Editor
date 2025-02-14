@@ -257,13 +257,13 @@
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.englishToolStripMenuItem.Text = "English";
             // 
             // turkishToolStripMenuItem
             // 
             this.turkishToolStripMenuItem.Name = "turkishToolStripMenuItem";
-            this.turkishToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.turkishToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.turkishToolStripMenuItem.Text = "Turkish";
             // 
             // ssMain
@@ -922,6 +922,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(858, 325);
             this.splitContainer1.SplitterDistance = 123;
             this.splitContainer1.SplitterWidth = 3;

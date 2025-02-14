@@ -19,9 +19,9 @@ namespace Tester.Core.Triggers.fctb_triggers
 {
     public class FCTB_Triggers
     {
-        public tabControl tsFiles;
+        public FATabStrip tsFiles;
         RuleEngine ruleEngine = new RuleEngine();
-        Navigate navigate = new Navigate();
+        public Navigate navigate;
 
         // Eşleşmeleri ve mevcut konumu global değişkenlerle tutalım tbFind
         private List<Range> matchRanges = new List<Range>();
@@ -29,11 +29,10 @@ namespace Tester.Core.Triggers.fctb_triggers
         private int currentMatchIndex = -1;
         int errorCounter = 0;
 
-        ToolStripStatusLabel lbWordUnderMouse;
+        public ToolStripStatusLabel lbWordUnderMouse;
         // Stil nesnesini bir kere oluşturun
         WavyLineStyle errorStyle = new WavyLineStyle(255, Color.Red);
         WavyLineStyle noErrorStyle = new WavyLineStyle(0, Color.Black);
-
 
 
 

@@ -27,7 +27,7 @@ using Tester.Core;
 using Tester.UI.Forms;
 using Tester.Core.Models;
 using Tester.Services;
-using AutocompleteMenuNS;
+using FastColoredTextBoxNS;
 
 namespace Tester
 {
@@ -40,9 +40,10 @@ namespace Tester
         private AutocompleteService _autocompleteService;
         private TreeViewService _treeViewService;
         private RuleEngine _ruleEngine;
-        private tabControl tsFiles;
 
-        Navigate navigate;
+
+        public tabControl tsFiles = new tabControl();
+        public Navigate navigate  = new Navigate();
 
         string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
         string[] methods = { "Equals()", "GetHashCode()", "GetType()", "ToString()" };
@@ -157,18 +158,23 @@ namespace Tester
         {
             InitializeComponent();
             InitializeContextMenu();
+
             //init menu images
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PowerfulCSharpEditor));
             copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
             cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
             pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            tsFiles = new tabControl();
+
             _fileService = new FileService();
             _syntaxChecker = new SyntaxChecker();
             _autocompleteService = new AutocompleteService();
             _treeViewService = new TreeViewService();
             _ruleEngine = new RuleEngine();
-            navigate =new Navigate();
+            tsFiles.lbWordUnderMouse = this.lbWordUnderMouse;
+
+            tsFiles.triggers.navigate = navigate;
+            navigate.tsFiles = tsFiles.GetFATabStrip();
+
 
         }
 
@@ -178,10 +184,11 @@ namespace Tester
             InitializeComponent();
             InitializeContextMenu();
             //init menu images
+
             this.KeyPreview = true;
             this.workspaceFullPath = workspaceFullPath;
 
-            
+
             //MessageBox.Show(workspaceFullPath + "\n\n\n" + usersAllVariablePath);
 
             // Diziyi List<T> yapısına dönüştür
@@ -191,13 +198,20 @@ namespace Tester
             copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
             cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
             pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            tsFiles = new tabControl();
+            
+            
             _fileService = new FileService();
             _syntaxChecker = new SyntaxChecker();
             _autocompleteService = new AutocompleteService();
             _treeViewService = new TreeViewService();
             _ruleEngine = new RuleEngine();
-            navigate = new Navigate();
+
+            tsFiles.lbWordUnderMouse = this.lbWordUnderMouse;
+
+            tsFiles.triggers.navigate = navigate;
+            navigate.tsFiles = tsFiles.GetFATabStrip();
+
+
 
         }
 
@@ -1675,6 +1689,11 @@ namespace Tester
             {
                 MessageBox.Show("SONPROJELER.txt dosyası bulunamadı.");
             }
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

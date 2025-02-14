@@ -11,7 +11,7 @@ namespace Tester.Core
 {
     public class Navigate
     {
-        public tabControl tsFiles;
+        public FATabStrip tsFiles;
         public DateTime lastNavigatedDateTime = DateTime.Now;
 
         public bool NavigateBackward()
@@ -19,9 +19,9 @@ namespace Tester.Core
             DateTime max = new DateTime();
             int iLine = -1;
             FastColoredTextBox tb = null;
-            for (int iTab = 0; iTab < tsFiles.GetFATabStrip().Items.Count; iTab++)
+            for (int iTab = 0; iTab < tsFiles.Items.Count; iTab++)
             {
-                var t = (tsFiles.GetFATabStrip().Items[iTab].Controls[0] as FastColoredTextBox);
+                var t = (tsFiles.Items[iTab].Controls[0] as FastColoredTextBox);
                 for (int i = 0; i < t.LinesCount; i++)
                     if (t[i].LastVisit < lastNavigatedDateTime && t[i].LastVisit > max)
                     {
@@ -32,7 +32,7 @@ namespace Tester.Core
             }
             if (iLine >= 0)
             {
-                tsFiles.GetFATabStrip().SelectedItem = (tb.Parent as FATabStripItem);
+                tsFiles.SelectedItem = (tb.Parent as FATabStripItem);
                 tb.Navigate(iLine);
                 lastNavigatedDateTime = tb[iLine].LastVisit;
                 Console.WriteLine("Backward: " + lastNavigatedDateTime);
@@ -48,9 +48,9 @@ namespace Tester.Core
             DateTime min = DateTime.Now;
             int iLine = -1;
             FastColoredTextBox tb = null;
-            for (int iTab = 0; iTab < tsFiles.GetFATabStrip().Items.Count; iTab++)
+            for (int iTab = 0; iTab < tsFiles.Items.Count; iTab++)
             {
-                var t = (tsFiles.GetFATabStrip().Items[iTab].Controls[0] as FastColoredTextBox);
+                var t = (tsFiles.Items[iTab].Controls[0] as FastColoredTextBox);
                 for (int i = 0; i < t.LinesCount; i++)
                     if (t[i].LastVisit > lastNavigatedDateTime && t[i].LastVisit < min)
                     {
@@ -61,7 +61,7 @@ namespace Tester.Core
             }
             if (iLine >= 0)
             {
-                tsFiles.GetFATabStrip().SelectedItem = (tb.Parent as FATabStripItem);
+                tsFiles.SelectedItem = (tb.Parent as FATabStripItem);
                 tb.Navigate(iLine);
                 lastNavigatedDateTime = tb[iLine].LastVisit;
                 Console.WriteLine("Forward: " + lastNavigatedDateTime);
