@@ -28,12 +28,12 @@ namespace Tester.UI.Forms
         List<ExplorerItem> explorerList = new List<ExplorerItem>();
         public FCTB_Triggers triggers = new FCTB_Triggers();
 
-
         AutocompleteService autocompleteService = new AutocompleteService();
         FileService fileService = new FileService();
         Color changedLineColor = Color.FromArgb(255, 230, 230, 255);
 
         public ToolStripStatusLabel lbWordUnderMouse;
+        public ListView errorList;
 
         private Style sameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(50, Color.Gray)));
 
@@ -42,7 +42,7 @@ namespace Tester.UI.Forms
             this.triggers.lbWordUnderMouse = lbWordUnderMouse;
             InitializeComponent();
             this.triggers.tsFiles = tsFiles;
-
+            this.triggers.errorList = errorList;
         }
 
 
@@ -222,10 +222,14 @@ namespace Tester.UI.Forms
                 tb.Focus();
                 tb.DelayedTextChangedInterval = 1000;
                 tb.DelayedEventsInterval = 500;
-                //tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(triggers.tb_TextChangedDelayed); // AKTİF EDİLECEK
+
+                
+                triggers.errorList = errorList;
+
+                tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(triggers.tb_TextChangedDelayed); // AKTİF EDİLECEK
                 tb.SelectionChangedDelayed += new EventHandler(triggers.tb_SelectionChangedDelayed);
                 tb.TextChanged += triggers.FastColoredTextBox_TextChanged;
-                //tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
+                tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
 
 
                 this.triggers.lbWordUnderMouse = lbWordUnderMouse;

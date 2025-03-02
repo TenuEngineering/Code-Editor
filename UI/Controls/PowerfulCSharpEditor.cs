@@ -42,7 +42,7 @@ namespace Tester
         private RuleEngine _ruleEngine;
 
 
-        public tabControl tsFiles = new tabControl();
+        public tabControl tsFiles;
         public Navigate navigate  = new Navigate();
 
         string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
@@ -170,6 +170,10 @@ namespace Tester
             _autocompleteService = new AutocompleteService();
             _treeViewService = new TreeViewService();
             _ruleEngine = new RuleEngine();
+            tsFiles = new tabControl();
+
+            tsFiles.errorList = this.errorList;
+
             tsFiles.lbWordUnderMouse = this.lbWordUnderMouse;
 
             tsFiles.triggers.navigate = navigate;
@@ -205,9 +209,10 @@ namespace Tester
             _autocompleteService = new AutocompleteService();
             _treeViewService = new TreeViewService();
             _ruleEngine = new RuleEngine();
+            tsFiles = new tabControl();
 
+            tsFiles.errorList = this.errorList;
             tsFiles.lbWordUnderMouse = this.lbWordUnderMouse;
-
             tsFiles.triggers.navigate = navigate;
             navigate.tsFiles = tsFiles.GetFATabStrip();
 

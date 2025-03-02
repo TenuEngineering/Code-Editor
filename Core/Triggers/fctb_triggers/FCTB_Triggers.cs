@@ -22,6 +22,7 @@ namespace Tester.Core.Triggers.fctb_triggers
         public FATabStrip tsFiles;
         RuleEngine ruleEngine = new RuleEngine();
         public Navigate navigate;
+        public ListView errorList;
 
         // Eşleşmeleri ve mevcut konumu global değişkenlerle tutalım tbFind
         private List<Range> matchRanges = new List<Range>();
@@ -37,97 +38,97 @@ namespace Tester.Core.Triggers.fctb_triggers
 
 
         // !! ÖENMLİ DÜZENLE
-        //public async void tb_TextChangedDelayed(object sender, TextChangedEventArgs e)
-        //{
-        //    await Task.Delay(100);
+        public async void tb_TextChangedDelayed(object sender, TextChangedEventArgs e)
+        {
+            await Task.Delay(100);
+            FastColoredTextBox tb = sender as FastColoredTextBox;
+            var code = tb.Text;
+            string filePath = tb.Tag as string;
+            string parentDirectoryName = "";
 
-        //    var code = tsFiles.getCurrentTB().Text;
-        //    string filePath = tsFiles.getCurrentTB().Tag as string;
-        //    string parentDirectoryName = "";
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                DirectoryInfo directoryInfo = Directory.GetParent(filePath);
+                if (directoryInfo != null)
+                {
+                    parentDirectoryName = directoryInfo.Parent?.Name;
+                }
+            }
 
-        //    if (!string.IsNullOrEmpty(filePath))
-        //    {
-        //        DirectoryInfo directoryInfo = Directory.GetParent(filePath);
-        //        if (directoryInfo != null)
-        //        {
-        //            parentDirectoryName = directoryInfo.Parent?.Name;
-        //        }
-        //    }
-
-        //    else
-        //    {
-        //        var tab = tsFiles.getCurrentTB().Parent as FATabStripItem;
-        //        if (tab != null)
-        //        {
-        //            filePath = tab.Tag as string;
-        //            if (!string.IsNullOrEmpty(filePath))
-        //            {
-        //                DirectoryInfo directoryInfo = Directory.GetParent(filePath);
-        //                if (directoryInfo != null)
-        //                {
-        //                    parentDirectoryName = directoryInfo.Parent?.Name;
-        //                }
-        //            }
-        //        }
-        //    }
-
-
-        //    // code txt üzerine variable klasörünün altındaki değişknelerin txt lerinden değişkenleri code stringine ekle
-
-        //    var syntaxChecker = new SyntaxChecker();
+            else
+            {
+                var tab = tb.Parent as FATabStripItem;
+                if (tab != null)
+                {
+                    filePath = tab.Tag as string;
+                    if (!string.IsNullOrEmpty(filePath))
+                    {
+                        DirectoryInfo directoryInfo = Directory.GetParent(filePath);
+                        if (directoryInfo != null)
+                        {
+                            parentDirectoryName = directoryInfo.Parent?.Name;
+                        }
+                    }
+                }
+            }
 
 
-        //    //var result = syntaxChecker.CheckSyntax(code);
-        //    //var syntaxTree = syntaxChecker.GetSyntaxTree(code);
-        //    //syntaxChecker.CheckSyntaxIssues(syntaxTree);
+            // code txt üzerine variable klasörünün altındaki değişknelerin txt lerinden değişkenleri code stringine ekle
 
-        //    tsFiles.getCurrentTB().Range.ClearStyle(errorStyle);
-        //    tsFiles.getCurrentTB().Range.ClearFoldingMarkers();
-        //    errorList.Items.Clear();
+            var syntaxChecker = new SyntaxChecker();
 
 
-        //    var errorPositions = syntaxChecker.GetSyntaxErrorPositions(code);
+            //var result = syntaxChecker.CheckSyntax(code);
+            //var syntaxTree = syntaxChecker.GetSyntaxTree(code);
+            //syntaxChecker.CheckSyntaxIssues(syntaxTree);
 
-        //    if (errorPositions.Count > 0)
-        //    {
-        //        errorCounter = 1;
-        //    }
+            tb.Range.ClearStyle(errorStyle);
+            tb.Range.ClearFoldingMarkers();
+            errorList.Items.Clear();
 
-        //    else
-        //    {
-        //        errorCounter = 0;
 
-        //    }
-        //    string[] a = new string[]
-        //    {
-        //        "Tür veya ad uzayı tanımı yada dosya sonu bekleniyor",
-        //        "'else' bir deyim başlatamaz.",
-        //        "Sözdizimi hatası, '(' bekleniyor",
-        //        ") bekleniyor",
-        //        "Geçersiz ifade terimi else",
-        //        "; bekleniyor",
-        //        "Geçersiz ifade terimi '{'"
-        //    };
-        //    await controlRules(sender);
+            var errorPositions = syntaxChecker.GetSyntaxErrorPositions(code);
 
-        //    foreach (var error in errorPositions)
-        //    {
-        //        if (a.Contains(error.errorMessage))
-        //        {
+            if (errorPositions.Count > 0)
+            {
+                errorCounter = 1;
+            }
 
-        //        }
-        //        // Hatalı bölgeyi vurgulamak için range (aralık) oluştur
-        //        var range = tsFiles.getCurrentTB().GetRange(new Place(error.startColumn, error.startLine), new Place(error.endColumn, error.startLine));
-        //        errorList.Items.Add(new ListViewItem(new string[] { "", $"{error.errorCode}", $"{error.errorMessage}", parentDirectoryName, $"{error.startLine + 1}" }));
+            else
+            {
+                errorCounter = 0;
 
-        //        // Hatalı bölgeye stil ekle
-        //        range.SetStyle(errorStyle);
+            }
+            string[] a = new string[]
+            {
+                "Tür veya ad uzayı tanımı yada dosya sonu bekleniyor",
+                "'else' bir deyim başlatamaz.",
+                "Sözdizimi hatası, '(' bekleniyor",
+                ") bekleniyor",
+                "Geçersiz ifade terimi else",
+                "; bekleniyor",
+                "Geçersiz ifade terimi '{'"
+            };
+            //await ruleEngine.controlRules(sender);
 
-        //        // Hataları MessageBox ile gösterebilir veya başka bir işlem yapabilirsiniz.
-        //        //MessageBox.Show($"Hata Kodu: {error.errorCode}, Mesaj: {error.errorMessage}, Satır: {error.startLine + 1}");
-        //    }
+            foreach (var error in errorPositions)
+            {
+                if (a.Contains(error.errorMessage))
+                {
 
-        //}
+                }
+                // Hatalı bölgeyi vurgulamak için range (aralık) oluştur
+                var range = tb.GetRange(new Place(error.startColumn, error.startLine), new Place(error.endColumn, error.startLine));
+                errorList.Items.Add(new ListViewItem(new string[] { "", $"{error.errorCode}", $"{error.errorMessage}", parentDirectoryName, $"{error.startLine + 1}" }));
+
+                // Hatalı bölgeye stil ekle
+                range.SetStyle(errorStyle);
+
+                // Hataları MessageBox ile gösterebilir veya başka bir işlem yapabilirsiniz.
+                //MessageBox.Show($"Hata Kodu: {error.errorCode}, Mesaj: {error.errorMessage}, Satır: {error.startLine + 1}");
+            }
+
+        }
 
 
         public async void FastColoredTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -191,7 +192,7 @@ namespace Tester.Core.Triggers.fctb_triggers
         }
 
 
-        public async void tb_KeyDown(object sender, KeyEventArgs e, FATabStrip tsFiles)
+        public async void tb_KeyDown(object sender, KeyEventArgs e)
         {
             await Task.Delay(100);
 
