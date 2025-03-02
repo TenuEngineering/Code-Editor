@@ -249,6 +249,11 @@ namespace Tester.UI.Forms
                 popupMenu.Items.ImageList = ilAutocomplete;
                 popupMenu.MinFragmentLength = 1;
                 popupMenu.Opening += new EventHandler<CancelEventArgs>(popupMenu_Opening);
+
+                var variablePath = Path.GetDirectoryName(fileName);
+                MessageBox.Show(variablePath);
+
+                autocompleteService.getValueTagForAutoComplate(variablePath, false);
                 autocompleteService.BuildAutocompleteMenu(popupMenu);
                 (tb.Tag as TbInfo).popupMenu = popupMenu;
             }

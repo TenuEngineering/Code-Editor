@@ -8,6 +8,7 @@ using Tester.Properties;
 using Tester.Services.Autocomplate;
 using Tester.Core.Method;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Tester.Core
 {
@@ -94,7 +95,7 @@ namespace Tester.Core
             if (!PathReady)
             {
                 string newDirectoryName2 = "USER_DATA/Variable";
-                directoryPath = Path.GetDirectoryName(directoryPath);
+                //directoryPath = Path.GetDirectoryName(directoryPath);
                 if (Path.GetDirectoryName(directoryPath).Contains("USER_DATA"))
                 {
                     newDirectoryName2 = "/Variable";
@@ -122,12 +123,10 @@ namespace Tester.Core
 
             variableList = new List<string>(variableAutoComplate);
 
-
             foreach (var item in variable)
             {
 
                 string modifiedPath3 = Path.Combine(modifiedPath2, item);
-
                 if (File.Exists(modifiedPath3))
                 {
                     string[] lines1 = File.ReadAllLines(modifiedPath3);
@@ -163,14 +162,9 @@ namespace Tester.Core
                                 }
                                 variableList.Add(getValueTag);
                             }
-
                         }
-
-
                     }
-
                     variableAutoComplate = variableList.ToArray();
-
                 }
             }
 

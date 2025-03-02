@@ -7,8 +7,16 @@
       "RelativeMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|solutionrelative:ui\\controls\\tabcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|c:\\users\\elsat\\dropbox\\my pc (laptop-ki9fga7l)\\documents\\github\\code-editor\\services\\autocomplate\\autocompleteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|solutionrelative:services\\autocomplate\\autocompleteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|c:\\users\\elsat\\dropbox\\my pc (laptop-ki9fga7l)\\documents\\github\\code-editor\\core\\triggers\\fctb_triggers\\fctb_triggers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|solutionrelative:core\\triggers\\fctb_triggers\\fctb_triggers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|c:\\users\\elsat\\dropbox\\my pc (laptop-ki9fga7l)\\documents\\github\\code-editor\\core\\ruleengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|solutionrelative:core\\ruleengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\ui\\controls\\powerfulcsharpeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\ui\\controls\\powerfulcsharpeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|solutionrelative:ui\\controls\\powerfulcsharpeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|c:\\users\\elsat\\dropbox\\my pc (laptop-ki9fga7l)\\documents\\github\\code-editor\\core\\ruleengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}|Code_Editor.csproj|solutionrelative:core\\ruleengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,26 +42,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "AutocompleteService.cs",
+              "DocumentMoniker": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\Services\\Autocomplate\\AutocompleteService.cs",
+              "RelativeDocumentMoniker": "Services\\Autocomplate\\AutocompleteService.cs",
+              "ToolTip": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\Services\\Autocomplate\\AutocompleteService.cs*",
+              "RelativeToolTip": "Services\\Autocomplate\\AutocompleteService.cs*",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAmwEsAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T22:29:06.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "RuleEngine.cs",
               "DocumentMoniker": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\Core\\RuleEngine.cs",
               "RelativeDocumentMoniker": "Core\\RuleEngine.cs",
               "ToolTip": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\Core\\RuleEngine.cs",
               "RelativeToolTip": "Core\\RuleEngine.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAnwBEAAAAYAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAIA8wIkAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T22:00:31.776Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FCTB_Triggers.cs",
               "DocumentMoniker": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\Core\\Triggers\\fctb_triggers\\FCTB_Triggers.cs",
               "RelativeDocumentMoniker": "Core\\Triggers\\fctb_triggers\\FCTB_Triggers.cs",
               "ToolTip": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\Core\\Triggers\\fctb_triggers\\FCTB_Triggers.cs",
               "RelativeToolTip": "Core\\Triggers\\fctb_triggers\\FCTB_Triggers.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAmwCgAAAAvAAAA",
+              "ViewState": "AQIAACUAAAAAAAAAAAAmwCkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T21:55:08.305Z",
               "EditorCaption": ""
@@ -68,16 +85,16 @@
               "Title": "tabControl.cs",
               "DocumentMoniker": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\UI\\Controls\\tabControl.cs",
               "RelativeDocumentMoniker": "UI\\Controls\\tabControl.cs",
-              "ToolTip": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\UI\\Controls\\tabControl.cs",
-              "RelativeToolTip": "UI\\Controls\\tabControl.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "ToolTip": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\UI\\Controls\\tabControl.cs*",
+              "RelativeToolTip": "UI\\Controls\\tabControl.cs*",
+              "ViewState": "AQIAAPAAAAAAAAAAAAAuwP0AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T21:54:33.307Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "PowerfulCSharpEditor.cs",
               "DocumentMoniker": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\UI\\Controls\\PowerfulCSharpEditor.cs",
               "RelativeDocumentMoniker": "UI\\Controls\\PowerfulCSharpEditor.cs",
@@ -90,7 +107,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "PowerfulCSharpEditor.cs [Tasar\u0131m]",
               "DocumentMoniker": "C:\\Users\\elsat\\Dropbox\\My PC (LAPTOP-KI9FGA7L)\\Documents\\GitHub\\Code-Editor\\UI\\Controls\\PowerfulCSharpEditor.cs",
               "RelativeDocumentMoniker": "UI\\Controls\\PowerfulCSharpEditor.cs",
