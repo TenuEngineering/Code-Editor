@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FastColoredTextBoxNS;
-namespace Tester.Core.Method
+
+namespace ECUCodeEditor.Core.Method
 {
     public class MethodAutocompleteItem2 : MethodAutocompleteItem
     {

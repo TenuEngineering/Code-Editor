@@ -9,17 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tester.Properties;
+using ECUCodeEditor.Properties;
 using System.Resources;
 using System.Globalization;
 using System.Threading;
-using static Tester.createProject;
+using static ECUCodeEditor.createProject;
 using System.Security.Cryptography;
 using System.Reflection;
-using Tester.Services;
-using Tester.Core.Models;
+using ECUCodeEditor.Services;
+using ECUCodeEditor.Core.Models;
 
-namespace Tester
+
+namespace ECUCodeEditor
 {
     public partial class anasayfa : Form
     {
@@ -36,7 +37,7 @@ namespace Tester
             InitializeComponent();
 
             // Servislerin başlatılması
-            _languageService = new LanguageService("Tester.Languages.String", typeof(anasayfa).Assembly);
+            _languageService = new LanguageService("ECUCodeEditor.Languages.String", typeof(anasayfa).Assembly);
             _projectService = new ProjectService();
 
             // Varsayılan dil

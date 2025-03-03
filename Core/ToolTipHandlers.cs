@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tester.Core.Models;
+using ECUCodeEditor.Core.Models;
 
-namespace Tester.Core
+namespace ECUCodeEditor.Core
 {
     internal class ToolTipHandlers
     {

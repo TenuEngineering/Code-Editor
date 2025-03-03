@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
-using Tester.UI.Forms;
+using ECUCodeEditor.UI.Forms;
 using System.Drawing;
-using Tester.Core.Models;
+using ECUCodeEditor.Core.Models;
 using System.Text.RegularExpressions;
 using System.Drawing;
 using FastColoredTextBoxNS;
 
-namespace Tester.Core.Triggers.fctb_triggers
+namespace ECUCodeEditor.Core.Triggers.fctb_triggers
 {
     public class FCTB_Triggers
     {

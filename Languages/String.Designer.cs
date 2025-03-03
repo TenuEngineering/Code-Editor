@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tester.Languages {
+namespace ECUCodeEditor.Languages {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Tester.Languages {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tester.Languages.String", typeof(String).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ECUCodeEditor.Languages.String", typeof(String).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

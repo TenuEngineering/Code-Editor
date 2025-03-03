@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
-namespace Tester.Services.Autocomplate
+namespace ECUCodeEditor.Services.Autocomplate
 {
     /// <summary>
     /// Inerts line break after '}'

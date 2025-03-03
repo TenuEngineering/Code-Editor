@@ -1,4 +1,4 @@
-﻿namespace Tester.UI.Forms
+﻿namespace ECUCodeEditor.UI.Forms
 {
     partial class tabControl
     {

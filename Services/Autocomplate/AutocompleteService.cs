@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tester.Properties;
-using Tester.Services.Autocomplate;
-using Tester.Core.Method;
+using ECUCodeEditor.Properties;
+using ECUCodeEditor.Services.Autocomplate;
+using ECUCodeEditor.Core.Method;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Tester.Core
+namespace ECUCodeEditor.Core
 {
     public class AutocompleteService
     {

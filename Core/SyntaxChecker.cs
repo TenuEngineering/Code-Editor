@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace Tester
+namespace ECUCodeEditor
 {
 
     public class SyntaxChecker

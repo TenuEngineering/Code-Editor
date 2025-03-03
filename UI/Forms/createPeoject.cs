@@ -16,10 +16,10 @@ using System.Resources;
 using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
-using Tester.Services;
+using ECUCodeEditor.Services;
 using System.Reflection;
 
-namespace Tester
+namespace ECUCodeEditor
 {
     public partial class createProject : Form
     {
@@ -36,14 +36,14 @@ namespace Tester
             InitializeComponent();
             this.projectName = projectName;
             this.isSubFolderCreation = isSubFolderCreation; // Alt klasör oluşturma 
-            _languageService = new LanguageService("Tester.Languages.String", typeof(anasayfa).Assembly);
+            _languageService = new LanguageService("ECUCodeEditor.Languages.String", typeof(anasayfa).Assembly);
 
         }
 
         public createProject(string langCode, ResourceManager resManager2, CultureInfo cultureInfo)
         {
             InitializeComponent();
-            _languageService = new LanguageService("Tester.Languages.String", typeof(anasayfa).Assembly);
+            _languageService = new LanguageService("ECUCodeEditor.Languages.String", typeof(anasayfa).Assembly);
             if (langCode != "en")
             {
 

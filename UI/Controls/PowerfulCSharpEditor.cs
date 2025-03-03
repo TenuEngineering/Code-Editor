@@ -23,13 +23,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO.Ports;
 using System.Reflection.Metadata.Ecma335;
 using System.Collections;
-using Tester.Core;
-using Tester.UI.Forms;
-using Tester.Core.Models;
-using Tester.Services;
+using ECUCodeEditor.Core;
+using ECUCodeEditor.UI.Forms;
+using ECUCodeEditor.Core.Models;
+using ECUCodeEditor.Services;
 using FastColoredTextBoxNS;
 
-namespace Tester
+namespace ECUCodeEditor
 {
     // deneme
     // deneme
@@ -758,16 +758,16 @@ namespace Tester
                     switch (item.type)
                     {
                         case ExplorerItemType.Class:
-                            e.Value = global::Tester.Properties.Resources.class_libraries;
+                            e.Value = global::ECUCodeEditor.Properties.Resources.class_libraries;
                             return;
                         case ExplorerItemType.Method:
-                            e.Value = global::Tester.Properties.Resources.box;
+                            e.Value = global::ECUCodeEditor.Properties.Resources.box;
                             return;
                         case ExplorerItemType.Event:
-                            e.Value = global::Tester.Properties.Resources.lightning;
+                            e.Value = global::ECUCodeEditor.Properties.Resources.lightning;
                             return;
                         case ExplorerItemType.Property:
-                            e.Value = global::Tester.Properties.Resources.property;
+                            e.Value = global::ECUCodeEditor.Properties.Resources.property;
                             return;
                     }
             }

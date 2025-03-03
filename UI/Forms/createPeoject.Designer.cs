@@ -1,4 +1,4 @@
-﻿namespace Tester
+﻿namespace ECUCodeEditor
 {
     partial class createProject
     {

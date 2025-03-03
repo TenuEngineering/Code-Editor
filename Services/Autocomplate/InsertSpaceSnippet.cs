@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Tester.Services.Autocomplate
+namespace ECUCodeEditor.Services.Autocomplate
 {
     /// <summary>
     /// Divides numbers and words: "123AND456" -> "123 AND 456"

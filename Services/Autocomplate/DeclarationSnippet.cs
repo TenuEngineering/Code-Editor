@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Tester.Services.Autocomplate
+namespace ECUCodeEditor.Services.Autocomplate
 {
     /// <summary>
     /// This item appears when any part of snippet text is typed

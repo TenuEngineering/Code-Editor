@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tester.Core.Models
+namespace ECUCodeEditor.Core.Models
 {
     class ExplorerItemComparer : IComparer<ExplorerItem>
     {

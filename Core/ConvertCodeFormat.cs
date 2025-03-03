@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Tester
+namespace ECUCodeEditor
 {
     internal class ConvertCodeFormat
     {

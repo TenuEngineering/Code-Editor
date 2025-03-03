@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tester.UI.Forms;
+using ECUCodeEditor.UI.Forms;
 
-namespace Tester.Core
+namespace ECUCodeEditor.Core
 {
     public class Navigate
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tester.Services
+namespace ECUCodeEditor.Services
 {
     public class InvisibleCharsRenderer : Style
     {

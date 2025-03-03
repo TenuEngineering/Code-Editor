@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tester.Services.Autocomplate;
-using Tester.Core;
-using Tester.Core.Models;
+using ECUCodeEditor.Services.Autocomplate;
+using ECUCodeEditor.Core;
+using ECUCodeEditor.Core.Models;
 
-namespace Tester.Core
+namespace ECUCodeEditor.Core
 {
     public class FileService
     {

@@ -10,10 +10,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using Tester.Core.Models;
-using static Tester.PowerfulCSharpEditor;
+using ECUCodeEditor.Core.Models;
+using static ECUCodeEditor.PowerfulCSharpEditor;
 
-namespace Tester.Core
+namespace ECUCodeEditor.Core
 {
     public class RuleEngine
     {

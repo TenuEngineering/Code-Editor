@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tester.Core.Models;
+using ECUCodeEditor.Core.Models;
 
-namespace Tester.Services
+namespace ECUCodeEditor.Services
 {
     public class ProjectService
     {

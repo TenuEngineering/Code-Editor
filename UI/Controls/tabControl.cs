@@ -13,13 +13,13 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tester.Core;
-using Tester.Core.Models;
-using Tester.Services;
+using ECUCodeEditor.Core;
+using ECUCodeEditor.Core.Models;
+using ECUCodeEditor.Services;
 using FastColoredTextBoxNS;
-using Tester.Core.Triggers.fctb_triggers;
+using ECUCodeEditor.Core.Triggers.fctb_triggers;
 
-namespace Tester.UI.Forms
+namespace ECUCodeEditor.UI.Forms
 {
     public partial class tabControl : UserControl
     {
