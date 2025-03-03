@@ -45,45 +45,6 @@ namespace Tester
         public tabControl tsFiles;
         public Navigate navigate  = new Navigate();
 
-        string[] keywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "remove", "select", "set", "value", "var", "where", "yield" };
-        string[] methods = { "Equals()", "GetHashCode()", "GetType()", "ToString()" };
-        string[] snippets = { "if(^)\n{\n}", "if(^)\n{\n}\nelse\n{\n}", "for(^;;)\n{\n}", "while(^)\n{\n}", "do\n{\n^;\n}while();", "switch(^)\n{\ncase : break;\n}" };
-        string[] declarationSnippets = {
-               "public class ^\n{\n}", "private class ^\n{\n}", "internal class ^\n{\n}",
-               "public struct ^\n{\n;\n}", "private struct ^\n{\n;\n}", "internal struct ^\n{\n;\n}",
-               "public void ^()\n{\n;\n}", "private void ^()\n{\n;\n}", "internal void ^()\n{\n;\n}", "protected void ^()\n{\n;\n}",
-               "public ^{ get; set; }", "private ^{ get; set; }", "internal ^{ get; set; }", "protected ^{ get; set; }"
-               };
-
-
-        Dictionary<string, int> format = new Dictionary<string, int>()
-        {
-            {"enable_pin",100},
-            {"input.digital.active_high",224 },
-            {"input.digital.active_low",192 },
-            {"input.analog",128 },
-            {"output.high.continues",96 },
-            {"output.high.timed",64 },
-            {"output.low.continues",32 },
-            {"output.low.timed",0 },
-        };
-        Dictionary<string, int> pinNumber = new Dictionary<string, int>()
-        {
-            {"a1",0},
-            {"a2",1 },
-            {"a3",2 },
-            {"a4",3 },
-            {"a5",4 },
-            {"a6",5 },
-            {"a7",6 },
-        };
-        Dictionary<string, int> typeTotalByte = new Dictionary<string, int>()
-        {
-            {"char",1},
-            {"int",2},
-            {"long",4 },
-            {"float",4 },
-        };
 
         // ToolTip işleyicilerini saklamak için bir Dictionary tanımlayın
         Dictionary<int, EventHandler<ToolTipNeededEventArgs>> toolTipHandlers = new Dictionary<int, EventHandler<ToolTipNeededEventArgs>>();
@@ -102,10 +63,7 @@ namespace Tester
         int errorCounter = 0;
         const int totalVariableSize = 15; //byte cinsinden total size
 
-        //combox taki değişken türü değişmeden önceki değerini almak için
-        private string previousComboBoxValue;
-        private string previousVarName;
-        private int oldTypeSize;
+
         private bool isDataGridViewChanged = false;
         private bool isUpdating = false; // Global bir değişken, güncellemenin gerçekleşip gerçekleşmediğini izler
 
@@ -113,16 +71,7 @@ namespace Tester
         private List<Range> matchRanges = new List<Range>();
         private int currentMatchIndex = -1;
 
-        //{"input",1},
-        //{"output",0},
-        //{ "digital",1},
-        //{ "analog",0},
-        //{ "high",1},
-        //{ "low",0},
-        //{ "continues",1},
-        //{ "timed",0},
-        //{ "active_high",1},
-        //{ "active_low",0},
+
  
 
 
@@ -841,12 +790,12 @@ namespace Tester
 
         private void backStripButton_Click(object sender, EventArgs e)
         {
-            navigate.NavigateBackward();
+            tsFiles.triggers.navigate.NavigateBackward();
         }
 
         private void forwardStripButton_Click(object sender, EventArgs e)
         {
-            navigate.NavigateForward();
+            tsFiles.triggers.navigate.NavigateForward();
         }
 
         DateTime lastNavigatedDateTime = DateTime.Now;
@@ -1094,12 +1043,12 @@ namespace Tester
                         sourceList = new List<string>(sources);
                         //fonksPath = $"{kartFilePath}/Functions";
                         file = Path.Combine(fonksiyonlarPath, item);
-
                         if (File.Exists(file))
                         {
                             string[] lines = File.ReadAllLines(file);
                             foreach (string line in lines)
                             {
+                                
                                 sourceList.Add(line);
                             }
                         }
@@ -1110,9 +1059,9 @@ namespace Tester
 
                         // Listeyi tekrar diziye dönüştür
                         sources = sourceList.ToArray();
+                        tsFiles.autocompleteService = _autocompleteService;
+                        tsFiles.autocompleteService.sources = sources;
                     }
-
-
 
                     //// Düğüm var mı ve .txt dosyası mı kontrol et
                     if (selectedNode != null && selectedNode.Text.EndsWith(".txt"))
@@ -1123,7 +1072,10 @@ namespace Tester
                         {
                             if (File.Exists(filePath))
                             {
+                                
+
                                 await tsFiles.CreateTab(filePath);
+ 
                                 string[] lines = File.ReadAllLines(filePath);
                                 StringBuilder numberedText = new StringBuilder();
                             }

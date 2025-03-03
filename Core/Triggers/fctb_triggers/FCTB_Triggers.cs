@@ -213,57 +213,57 @@ namespace Tester.Core.Triggers.fctb_triggers
 
         }
         // !! Önemli düzenle
-        //public void tbFind_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    FastColoredTextBox tbFind = tsFiles.getCurrentTB();
+        public void tbFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            FastColoredTextBox tbFind = sender as FastColoredTextBox;
 
-        //    if (e.KeyChar == '\r' && tsFiles.getCurrentTB() != null)
-        //    {
-        //        if (matchRanges.Count == 0) // Eğer eşleşmeler yoksa veya arama ilk defa yapılıyorsa
-        //        {
-        //            Range r = tbFindChanged ? tsFiles.getCurrentTB().Range.Clone() : tsFiles.getCurrentTB().Selection.Clone();
-        //            tbFindChanged = false;
-        //            r.End = new Place(tsFiles.getCurrentTB()[tsFiles.getCurrentTB().LinesCount - 1].Count, tsFiles.getCurrentTB().LinesCount - 1);
+            if (e.KeyChar == '\r' && tbFind != null)
+            {
+                if (matchRanges.Count == 0) // Eğer eşleşmeler yoksa veya arama ilk defa yapılıyorsa
+                {
+                    Range r = tbFindChanged ? tbFind.Range.Clone() : tbFind.Selection.Clone();
+                    tbFindChanged = false;
+                    r.End = new Place(tbFind[tbFind.LinesCount - 1].Count, tbFind.LinesCount - 1);
 
-        //            // Arama desenini oluştur ve tüm metinde eşleşmeleri bul
-        //            Regex pattern = new Regex(Regex.Escape(tbFind.Text)); // Metni güvenli hale getir
-        //            var matches = pattern.Matches(tsFiles.getCurrentTB().Text); // Eşleşmeleri al
+                    // Arama desenini oluştur ve tüm metinde eşleşmeleri bul
+                    Regex pattern = new Regex(Regex.Escape(tbFind.Text)); // Metni güvenli hale getir
+                    var matches = pattern.Matches(tbFind.Text); // Eşleşmeleri al
 
-        //            // Eşleşmeleri range olarak listeye ekleyelim
-        //            matchRanges.Clear(); // Önceki eşleşmeleri temizle
-        //            foreach (Match match in matches)
-        //            {
-        //                int startIndex = match.Index;
-        //                int length = match.Length;
-        //                Place startPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex);
-        //                Place endPlace = tsFiles.getCurrentTB().PositionToPlace(startIndex + length);
-        //                matchRanges.Add(new Range(tsFiles.getCurrentTB(), startPlace, endPlace)); // Eşleşmeyi ekle
-        //            }
+                    // Eşleşmeleri range olarak listeye ekleyelim
+                    matchRanges.Clear(); // Önceki eşleşmeleri temizle
+                    foreach (Match match in matches)
+                    {
+                        int startIndex = match.Index;
+                        int length = match.Length;
+                        Place startPlace = tbFind.PositionToPlace(startIndex);
+                        Place endPlace = tbFind.PositionToPlace(startIndex + length);
+                        matchRanges.Add(new Range(tbFind, startPlace, endPlace)); // Eşleşmeyi ekle
+                    }
 
-        //            if (matchRanges.Count == 0) // Eşleşme bulunamadıysa
-        //            {
-        //                MessageBox.Show("Not found.");
-        //                return;
-        //            }
-        //        }
+                    if (matchRanges.Count == 0) // Eşleşme bulunamadıysa
+                    {
+                        MessageBox.Show("Not found.");
+                        return;
+                    }
+                }
 
-        //        // Sonraki eşleşmeye geç
-        //        currentMatchIndex++;
-        //        if (currentMatchIndex >= matchRanges.Count) // Eğer sona ulaştıysak
-        //        {
-        //            MessageBox.Show("No more matches.");
-        //            currentMatchIndex = -1; // İlk başa dön
-        //            matchRanges.Clear(); // Eşleşmeleri temizle
-        //            return;
-        //        }
+                // Sonraki eşleşmeye geç
+                currentMatchIndex++;
+                if (currentMatchIndex >= matchRanges.Count) // Eğer sona ulaştıysak
+                {
+                    MessageBox.Show("No more matches.");
+                    currentMatchIndex = -1; // İlk başa dön
+                    matchRanges.Clear(); // Eşleşmeleri temizle
+                    return;
+                }
 
-        //        // Mevcut eşleşmeyi seçili hale getirme ve görünür yapma
-        //        var foundRange = matchRanges[currentMatchIndex];
-        //        foundRange.Inverse(); // Seçimi ters çevir
-        //        tsFiles.getCurrentTB().Selection = foundRange;
-        //        tsFiles.getCurrentTB().DoSelectionVisible();
-        //    }
-        //}
+                // Mevcut eşleşmeyi seçili hale getirme ve görünür yapma
+                var foundRange = matchRanges[currentMatchIndex];
+                foundRange.Inverse(); // Seçimi ters çevir
+                tbFind.Selection = foundRange;
+                tbFind.DoSelectionVisible();
+            }
+        }
         public async void tb_MouseMove(object sender, MouseEventArgs e)
         {
 

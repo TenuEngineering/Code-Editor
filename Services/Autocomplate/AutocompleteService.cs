@@ -34,7 +34,7 @@ namespace Tester.Core
                "public void ^()\n{\n;\n}", "private void ^()\n{\n;\n}", "internal void ^()\n{\n;\n}", "protected void ^()\n{\n;\n}",
                "public ^{ get; set; }", "private ^{ get; set; }", "internal ^{ get; set; }", "protected ^{ get; set; }"
                };
-        static string[] sources = new string[]{
+        public string[] sources = new string[]{
 
         };
         static string[] variableAutoComplate = new string[]{
@@ -57,7 +57,7 @@ namespace Tester.Core
             foreach (var item in methods)
                 items.Add(new MethodAutocompleteItem(item) { ImageIndex = 2 });
             foreach (var item in sources)
-                items.Add(new MethodAutocompleteItem(item));
+                items.Add(new MethodAutocompleteItem2(item));
             foreach (var item in variableAutoComplate)
                 items.Add(new MethodAutocompleteItem2(item));
             foreach (var item in keywords)

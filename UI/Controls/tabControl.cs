@@ -28,7 +28,7 @@ namespace Tester.UI.Forms
         List<ExplorerItem> explorerList = new List<ExplorerItem>();
         public FCTB_Triggers triggers = new FCTB_Triggers();
 
-        AutocompleteService autocompleteService = new AutocompleteService();
+        public AutocompleteService autocompleteService;
         FileService fileService = new FileService();
         Color changedLineColor = Color.FromArgb(255, 230, 230, 255);
 
@@ -230,7 +230,7 @@ namespace Tester.UI.Forms
                 tb.SelectionChangedDelayed += new EventHandler(triggers.tb_SelectionChangedDelayed);
                 tb.TextChanged += triggers.FastColoredTextBox_TextChanged;
                 tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
-
+                
 
                 this.triggers.lbWordUnderMouse = lbWordUnderMouse;
 
@@ -250,8 +250,8 @@ namespace Tester.UI.Forms
                 popupMenu.MinFragmentLength = 1;
                 popupMenu.Opening += new EventHandler<CancelEventArgs>(popupMenu_Opening);
 
+
                 var variablePath = Path.GetDirectoryName(fileName);
-                MessageBox.Show(variablePath);
 
                 autocompleteService.getValueTagForAutoComplate(variablePath, false);
                 autocompleteService.BuildAutocompleteMenu(popupMenu);
