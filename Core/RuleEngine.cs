@@ -136,7 +136,7 @@ namespace Tester.Core
 
 
         // !! ÖENMLİ DZNEL
-        private async Task controlRules(object sender, string fullCardName)
+        public async Task controlRules(object sender, string fullCardName)
         {
             await Task.Delay(100);
             FastColoredTextBox tb = sender as FastColoredTextBox;

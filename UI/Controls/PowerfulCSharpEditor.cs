@@ -1061,6 +1061,7 @@ namespace Tester
                         sources = sourceList.ToArray();
                         tsFiles.autocompleteService = _autocompleteService;
                         tsFiles.autocompleteService.sources = sources;
+                        tsFiles.triggers.fullCardName = fullCardName;
                     }
 
                     //// Düğüm var mı ve .txt dosyası mı kontrol et

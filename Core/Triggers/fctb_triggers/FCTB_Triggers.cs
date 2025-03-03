@@ -23,6 +23,7 @@ namespace Tester.Core.Triggers.fctb_triggers
         RuleEngine ruleEngine = new RuleEngine();
         public Navigate navigate;
         public ListView errorList;
+        public string fullCardName;
 
         // Eşleşmeleri ve mevcut konumu global değişkenlerle tutalım tbFind
         private List<Range> matchRanges = new List<Range>();
@@ -109,7 +110,8 @@ namespace Tester.Core.Triggers.fctb_triggers
                 "; bekleniyor",
                 "Geçersiz ifade terimi '{'"
             };
-            //await ruleEngine.controlRules(sender);
+            ruleEngine.errorList = errorList;
+            await ruleEngine.controlRules(sender, fullCardName);
 
             foreach (var error in errorPositions)
             {

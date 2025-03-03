@@ -228,6 +228,7 @@ namespace Tester.UI.Forms
 
                 tb.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(triggers.tb_TextChangedDelayed); // AKTİF EDİLECEK
                 tb.SelectionChangedDelayed += new EventHandler(triggers.tb_SelectionChangedDelayed);
+
                 tb.TextChanged += triggers.FastColoredTextBox_TextChanged;
                 tb.KeyDown += new KeyEventHandler(triggers.tb_KeyDown);
                 
