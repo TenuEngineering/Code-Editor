@@ -160,6 +160,7 @@ namespace ECUCodeEditor
             _ruleEngine = new RuleEngine();
             tsFiles = new tabControl();
 
+            _fileService.autocompleteService = _autocompleteService;
             tsFiles.errorList = this.errorList;
             tsFiles.lbWordUnderMouse = this.lbWordUnderMouse;
             tsFiles.triggers.navigate = navigate;
@@ -553,6 +554,7 @@ namespace ECUCodeEditor
                     if (result == DialogResult.Yes)
                     {
                         bool saveVal = await _fileService.Save(e.Item,sfdMain,activeProjectPath);
+                        _fileService.autocompleteService = _autocompleteService;
 
                         if (!saveVal)
                         {
@@ -585,6 +587,7 @@ namespace ECUCodeEditor
             if (tsFiles != null)
             {
                 await _fileService.Save(tsFiles.getCurrentTB().Parent as FATabStripItem, sfdMain,activeProjectPath);
+                _fileService.autocompleteService = _autocompleteService;
         
             }
         }
@@ -593,6 +596,7 @@ namespace ECUCodeEditor
             if (tsFiles != null)
             {
                 bool saveVal = await _fileService.Save(tsFiles.getCurrentTB().Parent as FATabStripItem, sfdMain, activeProjectPath);
+                _fileService.autocompleteService = _autocompleteService;
 
                 string oldFile = tsFiles.getCurrentTB().Tag as string;
                 tsFiles.getCurrentTB().Tag = null;
@@ -1601,6 +1605,8 @@ namespace ECUCodeEditor
             {
                 //if (tsFiles.SelectedItem != null)
                 await _fileService.Save(tsFiles.getCurrentTB().Parent as FATabStripItem, sfdMain,activeProjectPath);
+                _fileService.autocompleteService = _autocompleteService;
+
                 isDataGridViewChanged = false;
                 // Do what you want here
                 e.Handled = true;

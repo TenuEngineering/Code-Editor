@@ -16,7 +16,7 @@ namespace ECUCodeEditor.Core
     public class FileService
     {
         
-        AutocompleteService autocompleteService = new AutocompleteService();
+        public AutocompleteService autocompleteService;
         variableSizeControl variableSizeControl = new variableSizeControl();
         public string ReadFile(string path)
         {
