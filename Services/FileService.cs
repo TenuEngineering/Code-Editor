@@ -12,7 +12,7 @@ using ECUCodeEditor.Core;
 using ECUCodeEditor.Core.Models;
 
 namespace ECUCodeEditor.Core
-{
+{5
     public class FileService
     {
         
