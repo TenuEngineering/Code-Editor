@@ -554,7 +554,7 @@ namespace ECUCodeEditor
                     if (result == DialogResult.Yes)
                     {
                         bool saveVal = await _fileService.Save(e.Item,sfdMain,activeProjectPath);
-                        _autocompleteService.Set
+                        
                         _fileService.autocompleteService = _autocompleteService;
 
                         if (!saveVal)
